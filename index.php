@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>jSociety</title>
+  <link rel="stylesheet" type="text/css" href="css/layout.css">
 </head>
 <body>
 <?php

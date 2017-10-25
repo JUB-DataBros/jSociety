@@ -1,34 +1,40 @@
+body{
+  margin: 0;
+}
+
 .header{
   position: fixed;
   width: 100%;
   color: gray;
   height: 18%;
-  padding: 1% 0px;
+  background-color: lightblue;
 }
+
 .header > a {
   position: relative;
   height: 100%;
   left: 15%;
+  top: 10%;
 }
 
 .header > h1 {
   position: relative;
   left: 18%;
-  top: -45%;
+  top: -25%;
   display: inline-block;
 }
 
 img {
-  max-height: 100%;
+  max-height: 75%;
 }
 
 .sidebar{
   position: fixed;
-  top: 28%;
-  left: 2%;
-  height: 72%;
+  top: 18%;
+  height: 80%;
   width: 15%;
   padding: 1% 2.5%;
+  background-color: lightblue;
 }
 
 .side-button {
