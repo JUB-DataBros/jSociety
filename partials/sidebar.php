@@ -2,7 +2,6 @@
   <input type="text" name="search" placeholder="Search">
   <button type="button" id="search"><img src="images/search.png"></button><br>
 
-  <button type="button" class="side-button" name="home" onclick="sidebarClick('disclaimer')">Homepage</button><br>
   <button type="button" class="side-button" name="feed" onclick="sidebarClick('feed')">Feed</button><br>
   <button type="button" class="side-button" name="profile" onclick="sidebarClick('profile')">Profile</button><br>
   <button type="button" class="side-button" name="clubs" onclick="sidebarClick('clubs')">Clubs</button><br>
