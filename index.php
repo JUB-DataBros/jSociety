@@ -10,11 +10,12 @@
     include('partials/sidebar.php');
   ?>
   <div class="body">
+    <br>
   </div>
   <script src="js/jquery.js"></script>
   <script src="js/main.js"></script>
   <script>
-    $(document).ready(loadIndex()); 
+    $(document).ready(loadIndex());
   </script>
 </body>
 </html>
