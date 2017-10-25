@@ -38,6 +38,7 @@ function sidebarClick(page) {
 }
 
 function loadIndex() {
+  loadPage("routes/feed.php");
   getPage = findGetParameter("page");
   switch(getPage){
     case "feed":
