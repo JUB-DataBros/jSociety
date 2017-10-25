@@ -1,7 +1,7 @@
 # jSociety
 
 Link to the page:
-http://clabsql.clamv.jacobs-university.de/~aakgun/index.html
+http://clabsql.clamv.jacobs-university.de/~aakgun/
 
 For Filezilla, use sftp!
 
