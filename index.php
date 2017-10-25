@@ -14,19 +14,7 @@
   <script src="js/jquery.js"></script>
   <script src="js/main.js"></script>
   <script>
-  loadPage("routes/disclaimer.php"); //this is the home content now
-  getPage = findGetParameter("page");
-  //alert(getPage);
-  switch(getPage){
-    case "feed":
-    case "profile":
-    case "events":
-    case "clubs":
-    case "settings":
-    case "disclaimer"
-      loadPage("routes/" + getPage + ".php");
-      break;
-  }
+    $(document).ready(loadIndex()); 
   </script>
 </body>
 </html>

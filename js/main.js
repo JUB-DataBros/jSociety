@@ -36,3 +36,20 @@ function sidebarClick(page) {
   loadPage("routes/" + page + ".php");
   changeURL("?page=" + page);
 }
+
+function loadIndex() {
+  alert("Script Runs!");
+  loadPage("routes/disclaimer.php"); //this is the home content now
+  getPage = findGetParameter("page");
+  //alert(getPage);
+  switch(getPage){
+    case "feed":
+    case "profile":
+    case "events":
+    case "clubs":
+    case "settings":
+    case "disclaimer"
+      loadPage("routes/" + getPage + ".php");
+      break;
+  }
+}
