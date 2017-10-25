@@ -19,7 +19,7 @@ function loadPage(page) {
   })
 
   .done(function(data) {
-    $(".body").html(page + ": " + data);
+    $(".body").html(data);
   })
 
   .fail(function(data) {
