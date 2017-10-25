@@ -24,6 +24,6 @@ function loadPage(page) {
 
   .fail(function(data) {
     $(".body").append("AJAX Request to page " + page + " failed: <br>");
-    $(".body").append(data);
+    $(".body").append("Data: <br>" + data);
   });
 }

@@ -20,7 +20,7 @@ switch(getPage){
   case "events":
   case "clubs":
   case "settings":
-    loadPage(getPage + ".php");
+    loadPage("routes/" + getPage + ".php");
     break;
 }
 </script>
