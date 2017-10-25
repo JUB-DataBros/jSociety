@@ -38,7 +38,7 @@ function sidebarClick(page) {
 }
 
 function loadIndex() {
-  loadPage("routes/feed.php");
+  loadPage("routes/feed.php"); //Feed is the homepage
   getPage = findGetParameter("page");
   switch(getPage){
     case "feed":
