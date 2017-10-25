@@ -19,11 +19,11 @@ function loadPage(page) {
   })
 
   .done(function(data) {
-    $(".body").append(page + ": " + data);
+    $(".body").html(page + ": " + data);
   })
 
   .fail(function(data) {
-    $(".body").append("AJAX Request to page " + page + " failed: <br>");
+    $(".body").html("AJAX Request to page " + page + " failed: <br>");
     $(".body").append("Data: <br>" + data);
   });
 }
