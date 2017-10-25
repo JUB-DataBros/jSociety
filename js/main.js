@@ -27,3 +27,12 @@ function loadPage(page) {
     $(".body").append("Data: <br>" + data);
   });
 }
+
+function changeURL(path) {
+  window.history.pushState({},"", path);
+}
+
+function sidebarClick(page) {
+  loadPage("routes/" + page + ".php");
+  changeURL("?page=" + page);
+}

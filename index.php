@@ -21,6 +21,7 @@ switch(getPage){
   case "events":
   case "clubs":
   case "settings":
+  case "disclaimer"
     loadPage("routes/" + getPage + ".php");
     break;
 }
