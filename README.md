@@ -11,5 +11,4 @@ Email address:
 jub.databros@gmail.com
 
 Resources:
-
-https://pixabay.com/en/magnifying-glass-search-search-bar-1976105/
+- https://pixabay.com/en/magnifying-glass-search-search-bar-1976105/
