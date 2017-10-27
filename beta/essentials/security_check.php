@@ -32,7 +32,7 @@ This must be included in every partial other than login.php and forgotpw.php
   }
   else {
     $_SESSION['authentication'] = -1;
-    die("<h1>Authentication Failed</h1><script>loadPage('partials/login.php'); </script>);
+    die("<h1>Authentication Failed</h1><script>loadPage('partials/login.php');</script>");
   }
 
   //Prepare the next challenge
@@ -40,7 +40,7 @@ This must be included in every partial other than login.php and forgotpw.php
   $timeout = 0;
   while($s == False && timeout < 10) {
     $new_challenge = bin2hex(openssl_random_pseudo_bytes(16, $s));
-    // if the random number is cryptographicallysecure, $s is set True
+    // if the random number is cryptographically secure, $s is set True
     $timeout++;
   }
   if($s == True) {

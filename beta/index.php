@@ -12,6 +12,12 @@
     <?php
       SESSION_START();
       include('partials/header.php');
+      if($_SESSION['authentication'] == 1) {
+        echo "<script>loadPage('routes/feed.php');</script>";
+      }
+      else {
+        echo "<script>loadPage('routes/login.php');</script>";
+      }
       if(isset($_GET['page'])) {
         switch($_GET['page']){
           case "feed":
@@ -23,9 +29,6 @@
             echo "<script>loadPage('routes/' + getPage + '.php');";
             break;
         }
-      }
-      else {
-        echo "<script>loadPage('routes/feed.php');</script>";
       }
     ?>
     <div class="body"></div>

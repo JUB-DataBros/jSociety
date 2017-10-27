@@ -29,13 +29,13 @@
   <br><br>
   <input type="button" name="login_submit" value="Enter" onclick="loginAttempt()">
   <br><br>
-  <a name="forgotpwlink" href="#" onClick="loadPage('routes/forgotpw.php')">Forgot your password?</a>
+  <a name="forgotpwlink" href="#" onClick="loadPage('partials/forgotpw.php')">Forgot your password?</a>
 
 </form>
 
 <script>
   if (localStorage.getItem("username") !== null) {
-    document.getElementById("login_username").value = localStorage.getItem("username");
+    document.getElementById("username").value = localStorage.getItem("username");
     //Auto-fill username if previously existed
     //ALSO IMPLEMENT TO FORGOTPW.PHP PAGE
   }
