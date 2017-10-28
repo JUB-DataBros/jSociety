@@ -19,6 +19,7 @@ function findGetParameter(parameterName) {
 }
 
 function loadPage(page) {
+  //CONSIDER SENDING SECURITY DATA WITH POST
   $.ajax({
     method: "POST",
     url: page,

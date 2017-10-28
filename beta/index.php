@@ -13,6 +13,7 @@
       SESSION_START();
       include('partials/header.php');
       if($_SESSION['authentication'] == 1) {
+      //$_SESSION['authentication'] is only used to direct to the correct page
         echo "<script>loadPage('routes/feed.php');</script>";
       }
       else {
