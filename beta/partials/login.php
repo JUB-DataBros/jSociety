@@ -28,7 +28,7 @@
   <input type="password" name="login_password" placeholder="********">
   <br><br>
   <input type="button" name="login_submit" value="Enter"
-      onclick="alert('getElementById('login_username')'); loginAttempt()">
+      onclick="loginAttempt()">
       <!-- !!!!!!!!! CANNOT ACCESS AJAX RESPONSE'S DOM ELEMENTS-->
   <br><br>
   <a name="forgotpwlink" href="#" onClick="loadPage('routes/forgotpw.php')">Forgot your password?</a>
