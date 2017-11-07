@@ -16,26 +16,27 @@
   }
 ?>
 <div class="hidden">
-  <input type="hidden" name="crypto_challenge" value="<?php echo $_SESSION['crypto_challenge']; ?>">
-  <input type="hidden" name="session_id" value="<?php echo session_id(); ?>">
+  <input type="hidden" id="crypto_challenge" value="<?php echo $_SESSION['crypto_challenge']; ?>">
+  <input type="hidden" id="session_id" value="<?php echo session_id(); ?>">
 </div>
 
 <form method="POST" style="margin-left:20%;margin-top:15%">
-  <!-- margins are temporary until CSS file for body DIV is arranged -->
-  <input type="text" name="login_username" placeholder="e-mail address">
+  <!-- margins are temporary until CSS file is arranged -->
+  <input type="text" id="login_username" placeholder="e-mail address">
   @jacobs-university.de
   <br>
-  <input type="password" name="login_password" placeholder="********">
+  <input type="password" id="login_password" placeholder="********">
   <br><br>
-  <input type="button" name="login_submit" value="Enter" onclick="loginAttempt()">
+  <input type="button" name="login_submit" value="Enter"
+      onclick="loginAttempt()">
   <br><br>
-  <a name="forgotpwlink" href="#" onClick="loadPage('partials/forgotpw.php')">Forgot your password?</a>
+  <a name="forgotpwlink" href="#" onClick="loadPage('routes/forgotpw.php')">Forgot your password?</a>
 
 </form>
 
 <script>
   if (localStorage.getItem("username") !== null) {
-    document.getElementById("username").value = localStorage.getItem("username");
+    document.getElementById("login_username").value = localStorage.getItem("username");
     //Auto-fill username if previously existed
     //ALSO IMPLEMENT TO FORGOTPW.PHP PAGE
   }

@@ -6,9 +6,6 @@ This must be included in every partial other than login.php and forgotpw.php
 <?php
   SESSION_START();
 
-  if($_SESSION['authentication'] != 1) {
-    echo "<script> loadPage('partials/login.php'); </script>";
-  }
   if($isset($_GET['username'])) {
     //Fetch salted password from DB
     $_SESSION['salted_password'] = substr($_GET['username'], 0, 3) + "123";
@@ -16,7 +13,7 @@ This must be included in every partial other than login.php and forgotpw.php
     //first 3 letters of the username and followed by "123"
   }
   else {
-    die("<h1>Authentication Failed</h1><script>loadPage('partials/login.php');</script>");
+    //die("<h1>Authentication Failed</h1><script>loadPage('partials/login.php');</script>");
   }
   if(isset($_GET['token']) &&
     $_GET['token'] ===
@@ -32,7 +29,7 @@ This must be included in every partial other than login.php and forgotpw.php
   }
   else {
     $_SESSION['authentication'] = -1;
-    die("<h1>Authentication Failed</h1><script>loadPage('partials/login.php');</script>");
+    //die("<h1>Authentication Failed</h1><script>loadPage('partials/login.php');</script>");
   }
 
   //Prepare the next challenge
@@ -47,7 +44,7 @@ This must be included in every partial other than login.php and forgotpw.php
     $_SESSION['crypto_challenge'] = $new_challenge;
   }
   else {
-    die("New challenge cannot be securely generated");
+    //die("New challenge cannot be securely generated");
   }
 ?>
 <div class="hidden">
