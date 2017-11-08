@@ -1,8 +1,8 @@
 <h1>This is the events page!</h1>
 
 <?php
-  //session_start();
-  //include("partials/dbconnect.php");
+  session_start();
+  include("partials/dbconnect.php");
   $sql = "SELECT name, createdby, detail FROM dabr_events";
   $rs = $conn->query($sql);
   if($rs === false) {

@@ -47,6 +47,8 @@ function loadIndex() {
     case "clubs":
     case "settings":
     case "disclaimer":
+    case "maintenance":
+    case "createevent":
       loadPage("routes/" + getPage + ".php");
       break;
   }

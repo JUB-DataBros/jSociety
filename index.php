@@ -7,11 +7,12 @@
   <body>
     <?php
       //session_start();
-      //include("partials/dbconnect.php");  
+      //include("partials/dbconnect.php");
       include('partials/header.php');
       include('partials/sidebar.php');
       if(isset($_GET['page'])) {
-        echo "<script>loadPage('" . $_GET['page'] . "')</script>";
+        //echo "<script>alert('GET[Page]: " . $_GET['page'] . "')</script><br>";
+        //echo "<script>loadPage('" . $_GET['page'] . "')</script>";
       }
     ?>
     <div class="body">
