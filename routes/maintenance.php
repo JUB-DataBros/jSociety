@@ -2,5 +2,3 @@
 <button onclick="sidebarClick('register')">Registration</button>
 <br>
 <button onClick="sidebarClick('createevent')">Event Creation</button>
-<br>
-<button onClick="sidebarClick('events')">Events</button>

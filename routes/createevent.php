@@ -1,8 +1,11 @@
-<form method="POST">
-Name: <input type="text" name="create_event_name"><br>
-Detail: <input type="text" name="create_event_detail" style="height:200px"><br>
+<div>
+Name: <input type="text" name="ename"><br>
+Club: <select name="eclub"></select><br>
+Place: <input type="text" name="eplace"><br>
+Starts at: <input type="time" name="estart"> Ends at: <input type="time" name="eend"><br>
+Detail: <textarea name="edetail" rows="3"></textarea><br>
 <input type="submit" name="create_event_detail" value="Create">
-</form>
+</div>
 
 <?php
   if(isset($_POST['create_event_detail'])) {
