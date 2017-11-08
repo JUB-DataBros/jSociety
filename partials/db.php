@@ -15,26 +15,27 @@
     $query = mysql_query($sql);
 
     if(!$query) {
-      log("FAIL SQL Query: " . $sql . " Error: " . mysql_error());
+      writeLOG("FAIL SQL Query: " . $sql . " Error: " . mysql_error());
     }
     else {
-      log("SUCCESS SQL Query: " . $sql);
+      writeLOG("SUCCESS SQL Query: " . $sql);
     }
     return $query;
   }
 
-  function log($action) {
+  function writeLOG($action) {
     if($_SESSION['type'] == 0) { //ADMINLOG --> username
-      $sql = "INSERT INTO JSO_ADMINLOG VALUES(USERNAME = '" . $_SESSION['username'] ."', ACTION = '" . $action . "')";
+      $sql = "INSERT INTO JSO_ADMINLOG VALUES(USERNAME = '" . $_SESSION['username'] . "', ACTION = '" . $action . "')";
       mysql_query($sql); //Cannot handle error here
     }
     elseif($_SESSION['type'] == 1) { //STUDENTLOG --> id
-      $sql = "INSERT INTO JSO_STUDENTLOG VALUES(ID = '" . $_SESSION['id'] ."', ACTION = '" . $action . "')";
+      $sql = "INSERT INTO JSO_STUDENTLOG VALUES(ID = '" . $_SESSION['id'] . "', ACTION = '" . $action . "')";
       mysql_query($sql); //Cannot handle error here
     }
     else {
       die("<h1>Invalid SQL Query</h1><br>Invalid type in runsql(" . $sql . ", " . $_SESSION['type'] . ")");
       return 0;
     }
+  }
 
 ?>
