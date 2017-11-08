@@ -3,12 +3,12 @@
   $dbUsername="";
   $dbPassword="";
   $dbName="test";
-  $conn = mysql_connect($dbAddress, $dbUsername, $dbPassword, $dbName);
+  $conn = mysql_connect($dbAddress, $dbUsername, $dbPassword);
   if (!$conn) {
     die("<h1>Database connection failed</h1><br>Error:<br>" . mysql_error());
   }
-  //mysql_select_db($dbName) or die(mysql_error());
-  //mysql_set_charset('utf8');
+  mysql_select_db($dbName) or die(mysql_error());
+  mysql_set_charset('utf8');
 
 
   function runSQL($sql) {
