@@ -7,5 +7,6 @@
   <button type="button" class="side-button" name="clubs" onclick="sidebarClick('clubs')">Clubs</button><br>
   <button type="button" class="side-button" name="events" onclick="sidebarClick('events')">Events</button><br>
   <button type="button" class="side-button" name="settings" onclick="sidebarClick('settings')">Settings</button><br>
+  <button type="button" class="side-button" name="settings" onclick="sidebarClick('maintenance')">Maintenance</button><br>
   <button type="button" class="side-button bottom" name="Disclaimer" onclick="sidebarClick('disclaimer')">Disclaimer</button>
 </div>
