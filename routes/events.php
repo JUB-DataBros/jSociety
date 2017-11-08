@@ -1,4 +1,4 @@
-<h1>This is the events page!</h1>
+<button type="button" onclick="sidebarClick(createevent)">Create New Event</button>
 
 <?php
   $sql = "SELECT name, createdby, detail FROM dabr_events";

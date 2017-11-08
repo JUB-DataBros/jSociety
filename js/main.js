@@ -38,7 +38,7 @@ function sidebarClick(page) {
 }
 
 function loadIndex() {
-  loadPage("routes/feed.php"); //Feed is the homepage
+  loadPage("routes/register.php"); //Register is the homepage for now
   getPage = findGetParameter("page");
   switch(getPage){
     case "feed":
@@ -47,7 +47,6 @@ function loadIndex() {
     case "clubs":
     case "settings":
     case "disclaimer":
-    case "maintenance":
     case "register":
     case "createevent":
       loadPage("routes/" + getPage + ".php");
