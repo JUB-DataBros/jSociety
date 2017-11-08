@@ -11,7 +11,7 @@
   //mysql_set_charset('utf8');
 
 
-  function runsql($sql, $type) {
+  function runSql($sql, $type) {
     if($type == 0) {
       $logTable = "JSO_ADMINLOG";
     }
@@ -19,33 +19,36 @@
       $logTable = "JSO_ADMINLOG";
     }
     else {
-      die("<h1>Invalid SQL Query</h1>")
-      die("<br>Invalid type in runsql(" . $sql . ", " . $type . ")");
-      return 0;
+      die("<h1>Invalid SQL Query</h1><br>Invalid type in runsql(" . $sql . ", " . $type . ")");
+      return false;
     }
 
     $query = mysql_query($sql);
 
     if(!$query) {
-      return log("SQL Query: " . $sql . " Error: " . mysql_error());
+      log("FAIL SQL Query: " . $sql . " Error: " . mysql_error(), $type);
     }
     else {
-      log("Query: " . $sql );
-      return $query;
+      log("SUCCESS SQL Query: " . $sql, $type);
     }
+    return $query;
   }
 
   function log($action, $type) {
-    if($type == 0) {
-      $logTable = "JSO_ADMINLOG";
+    if($type == 0) { //ADMINLOG --> username
+      $sql = "INSERT INTO JSO_ADMINLOG VALUES(USERNAME = '" . $_SESSION['username'] ."', ACTION = '" . $action . "')";
+      mysql_query($sql); //Cannot handle error here
     }
-    elseif($type == 1) {
-      $logTable = "JSO_ADMINLOG";
+    elseif($type == 1) { //STUDENTLOG --> id
+      $sql = "INSERT INTO JSO_STUDENTLOG VALUES(ID = '" . $_SESSION['id'] ."', ACTION = '" . $action . "')";
+      mysql_query($sql); //Cannot handle error here
     }
     else {
-      die("<h1>Invalid type in runsql()</h1>");
+      die("<h1>Invalid SQL Query</h1><br>Invalid type in runsql(" . $sql . ", " . $type . ")");
       return 0;
     }
+
+
 
 
   }
