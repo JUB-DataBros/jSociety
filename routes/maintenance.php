@@ -1,6 +1,6 @@
 <h1>Input Pages</h1>
-<a href="register.php">Registration</a>
+<button onclick="sidebarClick('register')">Registration</button>
 <br>
-<a onClick="sidebarClick('createevent')">Event Creation</a>
+<button onClick="sidebarClick('createevent')">Event Creation</button>
 <br>
-<a onClick="sidebarClick('events')">Events</a>
+<button onClick="sidebarClick('events')">Events</button>
