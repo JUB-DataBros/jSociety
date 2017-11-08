@@ -6,8 +6,8 @@
   </head>
   <body>
     <?php
-      //session_start();
-      //include("partials/dbconnect.php");
+      session_start();
+      include("partials/db.php");
       include('partials/header.php');
       include('partials/sidebar.php');
       if(isset($_GET['page'])) {
