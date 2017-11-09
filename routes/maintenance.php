@@ -1,4 +1,7 @@
 <h1>Input Pages</h1>
-<button onclick="sidebarClick('register')">Registration</button>
+<script>alert("Notice that we do not have database access on the Clamv system")</script>
+<a href="register.php">Registration</a>
 <br>
-<button onClick="sidebarClick('createevent')">Event Creation</button>
+<a onClick="sidebarClick('createevent')">Event Creation</a>
+<br>
+<a onClick="sidebarClick('events')">Events</a>

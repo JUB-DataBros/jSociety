@@ -7,7 +7,7 @@
   <body>
     <?php
       session_start();
-      include("partials/db.php");
+      //include("partials/db.php");
       include('partials/header.php');
       include('partials/sidebar.php');
     ?>

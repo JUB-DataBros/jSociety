@@ -48,7 +48,6 @@ function loadIndex() {
     case "settings":
     case "disclaimer":
     case "maintenance":
-    case "register":
     case "createevent":
       loadPage("routes/" + getPage + ".php");
       break;
