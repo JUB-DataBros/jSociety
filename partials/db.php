@@ -1,41 +1,47 @@
 <?php
-  $dbAddress="localhost";
-  $dbUsername="";
-  $dbPassword="";
-  $dbName="test";
-  $conn = mysql_connect($dbAddress, $dbUsername, $dbPassword);
-  if (!$conn) {
-    die("<h1>Database connection failed</h1><br>Error:<br>" . mysql_error());
+$config = parse_ini_file("../../../db.ini");
+
+$db = new PDO("{$config['driver']}:dbname={$config['dbname']};host={$config['host']};charset={$config['charset']}", $config['username'], $config['password']);
+
+if (!$db) {
+  die("<h1>Database connection failed</h1><br>Error:<br>" . mysql_error());
+}
+
+function runSQL($sql, $args) {
+  /*
+  * $sql  : Parametered statement. Parametes should be written as ":parameter_name"
+  * $args : Associative array of parameters. Syntax: array(":parameter_name" => "value", ...)
+  */
+  $query = $db->prepare($sql);
+
+  if(!$query -> execute($args)) {
+    writeLOG("FAIL SQL Query: " . $sql . " Error: " . mysql_error());
   }
-  mysql_select_db($dbName) or die("<h1>Database selection failed</h1><br>Error:<br>" . mysql_error());
-  mysql_set_charset('utf8');
-
-
-  function runSQL($sql) {
-    $query = mysql_query($sql);
-
-    if(!$query) {
-      writeLOG("FAIL SQL Query: " . $sql . " Error: " . mysql_error());
-    }
-    else {
-      writeLOG("SUCCESS SQL Query: " . $sql);
-    }
-    return $query;
+  else {
+    writeLOG("SUCCESS SQL Query: " . $sql);
   }
+  return $query;
+  /*
+  * For select statements, fetch or fetchAll functions should be called on $query
+  */
+}
 
-  function writeLOG($action) {
-    if($_SESSION['type'] == 0) { //ADMINLOG --> username
-      $sql = "INSERT INTO JSO_ADMINLOG VALUES(USERNAME = '" . $_SESSION['username'] . "', ACTION = '" . $action . "')";
-      mysql_query($sql); //Cannot handle error here
-    }
-    elseif($_SESSION['type'] == 1) { //STUDENTLOG --> id
-      $sql = "INSERT INTO JSO_STUDENTLOG VALUES(ID = '" . $_SESSION['id'] . "', ACTION = '" . $action . "')";
-      mysql_query($sql); //Cannot handle error here
-    }
-    else {
-      die("<h1>Invalid SQL Query</h1><br>Invalid type in runsql(" . $sql . ", " . $_SESSION['type'] . ")");
-      return 0;
-    }
+function writeLOG($action) {
+  if($_SESSION['type'] == 0) { //ADMINLOG --> username
+    $logq = $db->prepare("INSERT INTO JSO_ADMINLOG VALUES(USERNAME = ':username', ACTION = ':action')");
+    $logq->execute(array(':username' => $_SESSION['username'], ':action' => $action)); //Cannot handle error here
   }
+  elseif($_SESSION['type'] == 1) { //STUDENTLOG --> id
+    $logq = $db->prepare("INSERT INTO JSO_STUDENTLOG VALUES(ID = ':username', ACTION = ':action')");
+    $logq->execute(array(':username' => $_SESSION['id'], ':action' => $action)); //Cannot handle error here
+  }
+  else {
+    die("<h1>Invalid SQL Query</h1><br>Invalid type in runsql(" . $sql . ", " . $_SESSION['type'] . ")");
+    /*
+    * This cannot stay in production phase.
+    * Printing out sql statment is not safe!
+    */
+  }
+}
 
 ?>
