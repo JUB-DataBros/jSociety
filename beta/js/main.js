@@ -2,7 +2,7 @@ if (typeof(Storage) !== "undefined") {
     // code for storage
 }
 else {
-    alert("Your web browser is not supported");
+    alert("Your web browser is not supported. This website will not function on your browser.");
 }
 
 function findGetParameter(parameterName) {
@@ -31,8 +31,11 @@ function loadPage(page) {
   })
 
   .fail(function(data) {
-    $(".body").html("AJAX Request to page " + page + " failed: <br>");
-    $(".body").append("Data: <br>" + data);
+    //loadPage("essentials/writeLOG?action=AJAX Request to page " + page + " failed");
+    //Cannot keep the log
+    //$(".body").html("AJAX Request to page " + page + " failed: <br>");
+    //$(".body").append("Data: <br>" + data);
+    loadPage("routes/feed.php");
   });
 }
 

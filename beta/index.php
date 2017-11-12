@@ -14,22 +14,22 @@
       include('partials/header.php');
       if($_SESSION['authentication'] == 1) {
       //$_SESSION['authentication'] is only used to direct to the correct page
-        echo "<script>loadPage('routes/feed.php');</script>";
+      //Not for security purpose. Security is handled in individual pages
+          switch($_GET['page']){
+            case "feed":
+            case "profile":
+            case "events":
+            case "clubs":
+            case "settings":
+            case "disclaimer":
+              echo "<script>loadPage('routes/" . $_GET['page'] . ".php');";
+              break;
+            default:
+              echo "<script>loadPage('routes/feed.php');";
+          }
       }
       else {
         echo "<script>loadPage('routes/login.php');</script>";
-      }
-      if(isset($_GET['page'])) {
-        switch($_GET['page']){
-          case "feed":
-          case "profile":
-          case "events":
-          case "clubs":
-          case "settings":
-          case "disclaimer":
-            echo "<script>loadPage('routes/' + getPage + '.php');";
-            break;
-        }
       }
     ?>
     <div class="body"></div>

@@ -6,48 +6,61 @@ This must be included in every partial other than login.php and forgotpw.php
 <?php
   SESSION_START();
 
-  if($isset($_GET['username'])) {
+  if($isset($_COOKIE['username']) && isset($_SESSION['salted_password']) == false) {
     //Fetch salted password from DB
-    $_SESSION['salted_password'] = substr($_GET['username'], 0, 3) + "123";
+    $_SESSION['salted_password'] = substr($_COOKIE['username'], 0, 3) + "123";
     //In this test case, password for each username starts with
-    //first 3 letters of the username and followed by "123"
+    //the first 3 letters of the username and followed by "123",
+    //Normally fetch salted_password from the database
+    //If user provides tampered username in the cookie, it will be denied
   }
   else {
-    //die("<h1>Authentication Failed</h1><script>loadPage('partials/login.php');</script>");
+    echo "<script>loadPage('partials/login.php');</script>";
+    //This is okay, because if token is wrong, page will be denied anyway
   }
-  if(isset($_GET['token']) &&
-    $_GET['token'] ===
-    hash("sha256", hash("sha256", $_GET['username']
+  if(isset($_COOKIE['token']) &&
+    $_COOKIE['token'] ===
+    hash("sha256", hash("sha256", $_COOKIE['username']
                                 + $_SESSION['salted_password']
                                 + session_id())
-                 + $_SESSION['challenge']
+                 + $_SESSION['crypto_challenge']
+                 //Fetch the crypto_challenge from the session, not from the cookie
     )
   ) {
     $_SESSION['authentication'] = 1;
-    $_SESSION['username'] = $_GET['username']; //It will be needed
+    $_SESSION['username'] = $_COOKIE['username']; //It will be needed
     include("sidebar.php");
   }
   else {
     $_SESSION['authentication'] = -1;
-    //die("<h1>Authentication Failed</h1><script>loadPage('partials/login.php');</script>");
+    unset($_SESSION['username']);
+    unset($_SESSION['id']);
+    die("<h1>Authentication Failed</h1><br><a onClick = \"loadPage('routes/login.php')\">Click here to continue</a>");
   }
 
+  //User is authenticated
   //Prepare the next challenge
   $s = False;
   $timeout = 0;
   while($s == False && timeout < 10) {
-    $new_challenge = bin2hex(openssl_random_pseudo_bytes(16, $s));
+    $new_challenge = hash("sha256", bin2hex(openssl_random_pseudo_bytes(256, $s)), false);
     // if the random number is cryptographically secure, $s is set True
     $timeout++;
   }
   if($s == True) {
     $_SESSION['crypto_challenge'] = $new_challenge;
+    setcookie("challenge", $_SESSION['crypto_challenge'], time()+3600);
+    //Not sure if 3600 is seconds
+    //Session and cookie are always syncronized on the crypto challenge
+    //Thats why always use those two to refer the crypto challenge
+    //Do not use hidden form input
+    //This allows multiple tabs
+
   }
   else {
-    //die("New challenge cannot be securely generated");
+    die("New challenge cannot be securely generated");
   }
 ?>
-<div class="hidden">
-  <input type="hidden" name="crypto_challenge" value="<?php echo $_SESSION['crypto_challenge']; ?>">
-  <input type="hidden" name="session_id" value="<?php echo session_id(); ?>">
-</div>
+<script>
+//JAVASCRIPT UPDATES THE TOKEN BASED ON THE NEW CHALLENGE AND CRYPTO KEY AND WRITES IT INTO THE COOKIE
+</script>

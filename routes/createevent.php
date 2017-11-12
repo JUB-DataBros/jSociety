@@ -1,3 +1,4 @@
+<script>loadIndex();</script>
 <div>
   Name: <input type="text" name="ename"><br>
   Club: <select name="eclub">

@@ -1,10 +1,13 @@
 <script src="js/login.js"></script>
 <script src="js/sha256.js"></script>
 <?php
+  session_abort(); //In case login.php is loaded when already logged in
+  session_start();
+  include("essentials/db.php");
   $s = False;
   $timeout = 0;
   while($s == False && timeout < 10) {
-    $new_challenge = bin2hex(openssl_random_pseudo_bytes(16, $s));
+    $new_challenge = hash("sha256", bin2hex(openssl_random_pseudo_bytes(256, $s)), false);
     // if the random number is cryptographically secure, $s is set True
     $timeout++;
   }
@@ -12,7 +15,8 @@
     $_SESSION['crypto_challenge'] = $new_challenge;
   }
   else {
-    die("New challenge cannot be securely generated");
+    writeLOG("Crypto challenge could not be generated in 'login.php'");
+    die("<h1>Unexpected Error</h1><br>Error code: S1001");
   }
 ?>
 <div class="hidden">
@@ -28,9 +32,11 @@
   <input type="password" id="login_password" placeholder="********">
   <br><br>
   <input type="button" name="login_submit" value="Enter"
-      onclick="loginAttempt()">
+      onclick="loginAttempt(<?php echo $_GET['page'];?>)">
+      <?php //Handle redirection upon non-logged-on page request ?>
   <br><br>
-  <a name="forgotpwlink" href="#" onClick="loadPage('routes/forgotpw.php')">Forgot your password?</a>
+  <a name="forgotpwlink" onClick="loadPage('routes/forgotpw.php<?php if(isset($_GET['page'])) {echo "?page=" + $_GET['page'];}?>')">Forgot your password?</a>
+  <?php //Carry $_GET['page'] across pages ?>
 
 </form>
 
