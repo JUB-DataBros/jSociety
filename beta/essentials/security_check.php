@@ -58,9 +58,16 @@ This must be included in every partial other than login.php and forgotpw.php
 
   }
   else {
-    die("New challenge cannot be securely generated");
+    die("New challenge could not be securely generated");
   }
 ?>
 <script>
-//JAVASCRIPT UPDATES THE TOKEN BASED ON THE NEW CHALLENGE AND CRYPTO KEY AND WRITES IT INTO THE COOKIE
+  //JAVASCRIPT UPDATES THE TOKEN BASED ON THE NEW CHALLENGE AND CRYPTO KEY AND WRITES IT INTO THE COOKIE
+  //var sessionid = document.cookie.match('(^|;)\\s*PHPSESSID\\s*=\\s*([^;]+)');
+  var sessionid = "<?php echo session_id();?>";
+  var username = sessionStorage.username;
+  var crypto_challenge = document.cookie.match('(^|;)\\s*challenge\\s*=\\s*([^;]+)');
+  var token = CryptoJS.SHA256(sessionStorage.crypto_key + crypto_challenge);
+
+  document.cookie = "PHPSESSID=" + sessionid + "; username=" + username + "; token=" + token;
 </script>

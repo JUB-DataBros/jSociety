@@ -19,7 +19,6 @@ function findGetParameter(parameterName) {
 }
 
 function loadPage(page) {
-  //CONSIDER SENDING SECURITY DATA WITH POST
   $.ajax({
     method: "POST",
     url: page,
@@ -32,6 +31,7 @@ function loadPage(page) {
 
   .fail(function(data) {
     //loadPage("essentials/writeLOG?action=AJAX Request to page " + page + " failed");
+    //This^ would be abused
     //Cannot keep the log
     //$(".body").html("AJAX Request to page " + page + " failed: <br>");
     //$(".body").append("Data: <br>" + data);

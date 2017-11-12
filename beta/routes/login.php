@@ -16,7 +16,7 @@
   }
   else {
     writeLOG("Crypto challenge could not be generated in 'login.php'");
-    die("<h1>Unexpected Error</h1><br>Error code: S1001");
+    die("<h1>Unexpected Error</h1><br>Error code: J1001. <a onClick=\"loadPage('routes/feed.php')>Click here to continue</a>\"");
   }
 ?>
 <div class="hidden">
