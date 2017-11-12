@@ -5,6 +5,7 @@ $db = new PDO("{$config['driver']}:dbname={$config['dbname']};host={$config['hos
 
 if (!$db) {
   die("<h1>Database connection failed</h1><br>Error:<br>" . mysql_error());
+  //die("<h1>Database connection failed</h1>"); -->This is for deployment
 }
 
 function runSQL($sql, $args) {
@@ -36,11 +37,8 @@ function writeLOG($action) {
     $logq->execute(array(':username' => $_SESSION['id'], ':action' => $action)); //Cannot handle error here
   }
   else {
-    die("<h1>Invalid SQL Query</h1><br>Invalid type in runsql(" . $sql . ", " . $_SESSION['type'] . ")");
-    /*
-    * This cannot stay in production phase.
-    * Printing out sql statment is not safe!
-    */
+    die("<h1>Unexpected Error</h1><br>Error code: J1002. <a onClick=\"loadPage('routes/feed.php')>Click here to continue</a>\"");
+    //Cannot keep the log
   }
 }
 
