@@ -25,10 +25,12 @@ This must be included in every partial other than login.php and forgotpw.php
                                 + session_id())
                  + $_SESSION['crypto_challenge']
                  //Fetch the crypto_challenge from the session, not from the cookie
+                 //Cookie might be tampered
     )
   ) {
     $_SESSION['authentication'] = 1;
     $_SESSION['username'] = $_COOKIE['username']; //It will be needed
+    //$_SESSION['id'] = ... Fetch user ID into here !!!!!!!!!!!!!!1
     include("sidebar.php");
   }
   else {
@@ -50,7 +52,7 @@ This must be included in every partial other than login.php and forgotpw.php
   if($s == True) {
     $_SESSION['crypto_challenge'] = $new_challenge;
     setcookie("challenge", $_SESSION['crypto_challenge'], time()+3600);
-    //Not sure if 3600 is seconds
+    //Not sure if 3600 is in seconds
     //Session and cookie are always syncronized on the crypto challenge
     //Thats why always use those two to refer the crypto challenge
     //Do not use hidden form input
@@ -58,16 +60,17 @@ This must be included in every partial other than login.php and forgotpw.php
 
   }
   else {
-    die("New challenge could not be securely generated");
+    writeLOG("New crypto challenge could not be generated in 'security_check.php'");
+    die("<h1>Unexpected Error</h1><br>Error code: J1002. <a onClick=\"loadPage('index.php')>Click here to continue</a>\"");
   }
 ?>
 <script>
   //JAVASCRIPT UPDATES THE TOKEN BASED ON THE NEW CHALLENGE AND CRYPTO KEY AND WRITES IT INTO THE COOKIE
   //var sessionid = document.cookie.match('(^|;)\\s*PHPSESSID\\s*=\\s*([^;]+)');
   var sessionid = "<?php echo session_id();?>";
-  var username = sessionStorage.username;
+  var username = localStorage.getItem("username");
   var crypto_challenge = document.cookie.match('(^|;)\\s*challenge\\s*=\\s*([^;]+)');
-  var token = CryptoJS.SHA256(sessionStorage.crypto_key + crypto_challenge);
+  var token = CryptoJS.SHA256(localStorage.getItem("crypto_key") + crypto_challenge);
 
   document.cookie = "PHPSESSID=" + sessionid + "; username=" + username + "; token=" + token;
 </script>

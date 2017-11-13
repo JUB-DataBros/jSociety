@@ -25,7 +25,7 @@
               echo "<script>loadPage('routes/" . $_GET['page'] . ".php');";
               break;
             default:
-              echo "<script>loadPage('routes/feed.php');";
+              echo "<script>loadPage('routes/feed.php');</script>";
           }
       }
       else {

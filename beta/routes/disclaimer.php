@@ -1,3 +1,7 @@
+<?php
+  //include("../essentials/security_check.php");
+  //No need for disclaimer
+?>
 <p>
 For each external link existing on this website, we initially have checked that the target page does not contain contents which is illegal wrt. German jurisdiction. However, as we have no influence on such contents, this may change without our notice. Therefore we deny any responsibility for the websites referenced through our external links from here.
 </p>

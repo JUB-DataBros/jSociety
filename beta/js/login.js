@@ -5,19 +5,19 @@ function loginAttempt(redirect) {
   var crypto_challenge = document.cookie.match('(^|;)\\s*challenge\\s*=\\s*([^;]+)');
   var sessionid = document.cookie.match('(^|;)\\s*PHPSESSID\\s*=\\s*([^;]+)');
   var username = $("#login_username").val();
-  var salt = CryptoJS.SHA256("DataBros-jSociety");
+  var salt = CryptoJS.SHA256("jSociety by DataBros");
   var salted_password =
     CryptoJS.SHA256(username + salt + $("#login_password").val());
     //Do not store $("#login_password").val() in a variable
-
-  sessionStorage.username = username;
-  sessionStorage.crypto_key = CryptoJS.SHA256(
-    username + salted_password + sessionid
-  );
+  var crypto_key = CryptoJS.SHA256(username + salted_password + sessionid);
   // Do not store salted_password.
   //Salted password is only stored in the server database
+  localStorage.setItem("username", username);
+  localStorage.setItem("crypto_key", crypto_key);
 
-  document.cookie = "username=" + username + "; token=" + CryptoJS.SHA256(sessionStorage.crypto_key + crypto_challenge);
+  var token = CryptoJS.SHA256(localStorage.getItem("crypto_key") + crypto_challenge)
+
+  document.cookie = "PHPSESSID=" + sessionid + "; username=" + username + "; token=" + token;
   if(redirect == "") {
     loadPage("routes/feed.php");
   }
