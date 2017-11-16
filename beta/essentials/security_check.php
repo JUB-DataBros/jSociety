@@ -5,8 +5,8 @@ This must be included in every partial other than login.php and forgotpw.php
 -->
 <?php
   SESSION_START();
-  echo "<script>alert(document.cookie);</script>";
-  if($isset($_COOKIE['username']) && $isset($_COOKIE['token'])) {
+  //echo "<script>alert(document.cookie);</script>";
+  if(isset($_COOKIE['username']) && isset($_COOKIE['token'])) {
     //Fetch salted password from DB
     //Don't keep the salted password in a SESSION variable
     $salt = hash("sha256", "jSociety by DataBros", false);
@@ -28,7 +28,7 @@ This must be included in every partial other than login.php and forgotpw.php
     ) {
       $_SESSION['authentication'] = 1;
       $_SESSION['username'] = $_COOKIE['username']; //It will be needed
-      //$_SESSION['userid'] = ... Fetch user ID into here !!!!!!!!!!!!!!1
+      //$_SESSION['userid'] = ... Fetch user ID here !!!!!!!!!!!!!!1
       include("sidebar.php");
       //Only end that doesn't die()
     }
@@ -36,13 +36,13 @@ This must be included in every partial other than login.php and forgotpw.php
       $_SESSION['authentication'] = -1;
       unset($_SESSION['username']);
       unset($_SESSION['userid']);
-      die("<script>loadPage('routes/login.php" . isset($_GET['page']) ? "?page=" . $_GET['page'] : "" . "');</script>");
+      die("<script>loadPage('routes/login.php" . (isset($_GET['page']) ? "?page=" . $_GET['page'] : "") . "');</script>");
       //Deny Authentication !
     }
   }
   else {
     $_SESSION['authentication'] = 0;
-    die("<script>loadPage('partials/login.php" . isset($_GET['page']) ? "?page=" . $_GET['page'] : "" . "');</script>");
+    die("<script>loadPage('partials/login.php" . (isset($_GET['page']) ? "?page=" . $_GET['page'] : "") . "');</script>");
     //Deny authentication and redirect to login with $_GET['page']
   }
 
@@ -57,7 +57,7 @@ This must be included in every partial other than login.php and forgotpw.php
   }
   if($s == True) {
     $_SESSION['crypto_challenge'] = $new_challenge;
-    setcookie("challenge", $_SESSION['crypto_challenge']);
+    setcookie("challenge", $_SESSION['crypto_challenge'], 0, "/jSociety/beta/"); //To be changed upon deployment
     //Not sure if 3600 is in seconds
     //Session and cookie are always syncronized on the crypto challenge
     //Thats why always use those two to refer the crypto challenge
