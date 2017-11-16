@@ -5,7 +5,8 @@ This must be included in every partial other than login.php and forgotpw.php
 -->
 <?php
   SESSION_START();
-  //echo "<script>alert(document.cookie);</script>";
+  $getPage = isset($_GET['page']) ? "?page=" . $_GET['page'] : "";
+  $error_script = "<script>loadPage('index.php" . $getPage . "'); location.replace('index.php');</script>";
   if(isset($_COOKIE['username']) && isset($_COOKIE['token'])) {
     //Fetch salted password from DB
     //Don't keep the salted password in a SESSION variable
@@ -36,13 +37,13 @@ This must be included in every partial other than login.php and forgotpw.php
       $_SESSION['authentication'] = -1;
       unset($_SESSION['username']);
       unset($_SESSION['userid']);
-      die("<script>loadPage('routes/login.php" . (isset($_GET['page']) ? "?page=" . $_GET['page'] : "") . "');</script>");
+      die($error_script);
       //Deny Authentication !
     }
   }
   else {
     $_SESSION['authentication'] = 0;
-    die("<script>loadPage('partials/login.php" . (isset($_GET['page']) ? "?page=" . $_GET['page'] : "") . "');</script>");
+    die($error_script);
     //Deny authentication and redirect to login with $_GET['page']
   }
 
