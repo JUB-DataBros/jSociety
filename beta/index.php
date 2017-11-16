@@ -22,14 +22,14 @@
             case "clubs":
             case "settings":
             case "disclaimer":
-              echo "<script>loadPage('routes/" . $_GET['page'] . ".php');";
+              echo "<script>loadPage('routes/" . $_GET['page'] . ".php');</script>";
               break;
             default:
               echo "<script>loadPage('routes/feed.php');</script>";
           }
       }
       else {
-        echo "<script>loadPage('routes/login.php');</script>";
+        echo "<script>loadPage('routes/login.php');</script><br>";
       }
     ?>
     <div class="body"></div>

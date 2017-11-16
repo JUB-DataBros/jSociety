@@ -1,5 +1,5 @@
 <?php
-  include("../essentials/security_check.php"); 
+  include("../essentials/security_check.php");
 ?>
 <h1>This is the feed page!</h1>
 <br>

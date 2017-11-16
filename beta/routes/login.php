@@ -3,7 +3,6 @@
 <!-- Cannot be included directly from login.php -->
 <script>localStorage.removeItem("crypto_key");</script>
 <?php
-  session_abort(); //In case login.php is loaded when already logged in
   session_start();
   include("essentials/db.php");
   $s = False;
@@ -15,7 +14,8 @@
   }
   if($s == True) {
     $_SESSION['crypto_challenge'] = $new_challenge;
-    setcookie("challenge", $_SESSION['crypto_challenge'], time()+3600);
+    setcookie("challenge", $_SESSION['crypto_challenge']);
+    echo "<script>alert(document.cookie);</script>"; //!!!!!!!!!!!!!! COOKIE DOES NOT INCLUDE THE CHALLENGE COOKIE !!!!!!!!!!!!!!!!!
   }
   else {
     writeLOG("Crypto challenge could not be generated in 'login.php'");
@@ -24,17 +24,22 @@
 ?>
 
 <form method="POST" style="margin-left:20%;margin-top:15%">
-  <!-- margins are temporary until CSS file is arranged -->
+  <?php
+    if($_SESSION['authentication'] == -1) {
+      echo "<div style='color:red'>Incorrect Username or Password</div><br>";
+      $_SESSION['authentication'] = 0;
+    }
+  ?>
   <input type="text" id="login_username" placeholder="e-mail address">
   @jacobs-university.de
   <br>
   <input type="password" id="login_password" placeholder="********">
   <br><br>
-  <input type="button" name="login_submit" value="Enter"
+  <input type="button" name="login_submit" value="Login" style="margin-left:85px"
       onclick="loginAttempt(<?php echo isset($_GET['page']) ? $_GET['page'] : "";?>)">
       <?php //Handle redirection upon non-logged-on page request ?>
   <br><br>
-  <a name="forgotpwlink" onClick="loadPage('routes/forgotpw.php<?php echo isset($_GET['page']) ? "?page=" . $_GET['page'] : "";?>')">Forgot your password?</a>
+  <a name="forgotpwlink" style="margin-left:30px" onClick="loadPage('routes/forgotpw.php<?php echo isset($_GET['page']) ? "?page=" . $_GET['page'] : "";?>')">Forgot your password?</a>
   <?php //Carry $_GET['page'] across pages ?>
 
 </form>

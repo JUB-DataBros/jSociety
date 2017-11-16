@@ -17,7 +17,8 @@ function loginAttempt(redirect) {
 
   var token = CryptoJS.SHA256(localStorage.getItem("crypto_key") + crypto_challenge)
 
-  document.cookie = "PHPSESSID=" + sessionid + "; username=" + username + "; token=" + token;
+  document.cookie = "username=" + username;
+  document.cookie = "token=" + token;
   if(redirect == "") {
     loadPage("routes/feed.php");
   }
