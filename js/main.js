@@ -49,7 +49,26 @@ function loadIndex() {
     case "disclaimer":
     case "maintenance":
     case "createevent":
+    case "search":
       loadPage("routes/" + getPage + ".php");
       break;
   }
 }
+
+// barışa sor
+/*
+function search_(keyword){
+	alert("I am an alert");
+        if (str != null && !str.isEmpty()){
+		$_GET["keyword"] = keyword;
+		sidebarClick(searh);
+	}else
+ 	    alert("Please Enter a Text");
+}
+
+function load(page,id) {
+    alert("I am an alert " +id);
+    sidebarClick(page);
+    $_GET["id"] = id;
+}
+*/
