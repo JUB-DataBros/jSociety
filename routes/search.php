@@ -1,9 +1,9 @@
 <h1>This is a search page!</h1>
-
+<input class="search" type="text" name="search" placeholder="Search.."> 
 
 <?php
 // Trying to find the matching words
-// inner,left,rgiht joins will give us same answer because all tables we are combining has common attributes
+// inner,left,right joins will give us same answer because all tables we are combining has common attributes
 // in select need to change some attribute names because there was some name clashes
 
 // looks the club and hobby name
@@ -31,6 +31,7 @@ foreach($sql as $key => $search){
 
 ?>
 <h2>CLUBS</h2>
+<hr>
  <div class="club-button">
  	 <button name=<?php echo "someid";?> onclick="load('getclub',$('#someid').val())">Club1<br>Sport</button>
  	 <button name=<?php echo "someid";?> onclick="load('getclub',$('#someid').val())">Club1<br>Sport</button>
@@ -42,7 +43,7 @@ foreach($sql as $key => $search){
 
 
 <!--<?php
-/* mysql_fetch_array kullanılmıyıcak
+/* mysql_fetch_array kullanılmayacak!
 	 while($result = mysql_fetch_array($query["club"])){
 		echo '<td>'.$result["cname"].'</td>';
 		echo '<td>'.$result["hname"].'</td>';
@@ -50,9 +51,87 @@ foreach($sql as $key => $search){
 
 	?>-->
 
-<h2>STUDENT</h2>
-<h2>EVENT</h2>
 
+
+<h2>STUDENT</h2>
+<hr>
+<div class ="student-button">
+
+	<button name="someid" onclick="load('getuser', $('#someid').val())">
+<!--
+		<table>
+		<tr><td></td><td>userName</td></tr>
+	
+		<tr><th><img src="images/diploma.png"></th><th>Event Name</th></tr>
+		<tr><th><img src="images/house.png"></th><th>Event Name</th></tr>
+		<tr><th><img src="images/email.png"></th><th>someemila@jacobs-university.de</th></tr>
+		</table>
+-->
+		Event Name<hr>
+		<ul>
+  			<li class="major">IEM</li>
+			<li class="college">Krupp</li>
+			<li class="email">someemila@jacobs-university.de</li>
+		</ul>
+		
+	</button>
+	<button name="someid" onclick="load('getuser', $('#someid').val())">
+<!--
+		<table>
+		<tr><td></td><td>userName</td></tr>
+	
+		<tr><th><img src="images/diploma.png"></th><th>Event Name</th></tr>
+		<tr><th><img src="images/house.png"></th><th>Event Name</th></tr>
+		<tr><th><img src="images/email.png"></th><th>someemila@jacobs-university.de</th></tr>
+		</table>
+-->
+		Event Name<hr>
+		<ul>
+  			<li class="major">IEM</li>
+			<li class="college">Krupp</li>
+			<li class="email">someemila@jacobs-university.de</li>
+		</ul>
+		
+	</button>
+	<button name="someid" onclick="load('getuser', $('#someid').val())">
+<!--
+		<table>
+		<tr><td></td><td>userName</td></tr>
+	
+		<tr><th><img src="images/diploma.png"></th><th>Event Name</th></tr>
+		<tr><th><img src="images/house.png"></th><th>Event Name</th></tr>
+		<tr><th><img src="images/email.png"></th><th>someemila@jacobs-university.de</th></tr>
+		</table>
+-->
+		Event Name<hr>
+		<ul>
+  			<li class="major">IEM</li>
+			<li class="college">Krupp</li>
+			<li class="email">someemila@jacobs-university.de</li>
+		</ul>
+		
+	</button>
+	<button name="someid" onclick="load('getuser', $('#someid').val())">
+<!--
+		<table>
+		<tr><td></td><td>userName</td></tr>
+	
+		<tr><th><img src="images/diploma.png"></th><th>Event Name</th></tr>
+		<tr><th><img src="images/house.png"></th><th>Event Name</th></tr>
+		<tr><th><img src="images/email.png"></th><th>someemila@jacobs-university.de</th></tr>
+		</table>
+-->
+		Event Name<hr>
+		<ul>
+  			<li class="major">IEM</li>
+			<li class="college">Krupp</li>
+			<li class="email">someemila@jacobs-university.de</li>
+		</ul>
+		
+	</button>
+</div>
+<h2>EVENT</h2>
+<hr>
 <div  class="header-event-table">
 		<table>
 		<tr>

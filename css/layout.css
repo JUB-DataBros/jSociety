@@ -91,39 +91,60 @@ img {
   margin-left: 1%;
 
 }
+
+/*Pretty horizontal line*/
+.body > hr{
+   margin-right: 40%;
+   margin-top: -15px;
+   margin-bottom: 10px;
+   border: 0;
+   height: 0;
+   border-top: 1px solid rgba(0, 0, 0, 0.3);
+   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
 /*For the input tables*/
 .body > form{
-  position: relative;
+  /*position: relative;*/
   top: 10%;
 }
 
 .body > form > input{
    /*border-style: solid;*/
-   position: relative;
+   /*position: relative;*/
    margin-left: 20%
 }
 
-/*For showing disclamir page pretty*/
+/*Pretty Paraghraph*/
 .body > p{
-   position: relative;
+   /*position: relative;*/
    font-family:"Georgia", sans-serif;
    margin-right:40%;
 }
 
-/*Show the frame of the table*/
-/*
-.body > table, th, td{
-   border: 1px solid gray;
-   border-collapse: collapse;
-   padding: 15px;
-   margin-right:40%;
+/*Search Page*/
+/*Taken from https://www.w3schools.com/howto/howto_css_animated_search.asp*/
+input[type=text].search {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url("search.png");
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
 }
-.body > th, td{
-   width: 20%;
-}
-*/
 
-/*For Search Page*/
+input[type=text].search:focus {
+    width: 60%;
+}
+
+
+/*For Displaying Clubs in Search Page*/
 .body > .club-button{
   margin-right: 40%;
   margin-left: 2%;
@@ -133,7 +154,7 @@ img {
     display:inline-block;
     margin-right:5px;
     margin-bottom:5px;
-    border: 2px solid #87CEEB; /*Dark Blue*/
+    border: 2px solid #87CEEB;
     background-color: white;
     padding: 14px 40px; /* Some padding */
     color: black; /* White text */
@@ -141,6 +162,7 @@ img {
     cursor: pointer; /* Pointer/hand icon */
     width: 30%;
     height: 10%;
+    border-radius: 8px;
     transition-duration: 0.4s;
 }
 
@@ -150,11 +172,11 @@ img {
    /*color: white;*/
 }
 
-
+/*For Displaying Events in Search Page*/
 .body > .event-table{
      margin-right:40%; 
      height: 500px;
-     overflow:auto;/*To scroll event table without scrolling the all page*/
+     overflow:auto;
 }
 
 .body > .event-table table, th, td{
@@ -164,7 +186,7 @@ img {
 .body > .event-table th, td{
    width: 19%;
    height: 40px;
-   border-bottom: 1px solid #ddd; /*Gray*/
+   border-bottom: 1px solid #ddd;
 }
 
 .body > .event-table button{
@@ -175,7 +197,7 @@ img {
 }
 
 .body > .event-table button:hover {
-    background-color: #DCDCDC; /*Gray*/ 
+    background-color: #DCDCDC;
 }
 
 .body > .header-event-table {
@@ -184,4 +206,71 @@ img {
    color: gray;
 }
 
+/*For Displaying Students in Search Page*/
+.body > .student-button{
+ margin-right: 40%;
+}
+
+.body > .student-button hr {
+   margin-bottom: -10px;
+   border: 0;
+   height: 0;
+   border-top: 1px solid rgba(0, 0, 0, 0.3);
+   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/*We display the result as list*/
+/*url(".../images/picuter.png") didn't worked
+url("images/picuter.png") didn't worked aswell*/
+.body > .student-button li.major{
+    list-style: circle inside url("diploma.png");
+    background-repeat: no-repeat;
+}
+.body > .student-button li.college{
+    list-style: circle inside url("house.png");
+    background-repeat: no-repeat;
+}
+.body > .student-button li.email{
+    list-style: circle inside url("email.png");
+    background-repeat: no-repeat;
+}
+.body > .student-button ul{
+ margin-left: -60px;
+ margin-right: -40px;
+ margin-bottom: -5px;
+}
+/*Generated list displayed inside the Button*/
+.body > .student-button button{
+    background-color: white;
+    display:inline-block;
+    margin-right:5px;
+    margin-bottom:5px;
+    border: 2px solid #87CEEB;
+    background-color: white;
+    padding: 14px 40px; /* Some padding */
+    color: black; /* White text */
+    text-align: left;
+    cursor: pointer; /* Pointer/hand icon */
+    width: 47%;
+    height: 10%;
+    border-radius: 8px;
+}
+
+/*Table didn't look as nice as the list*/
+/*
+.body > .student-button img{
+    max-height: 15px;
+}
+
+.body > .student-button table, th, td{
+   padding: 2px;
+   text-align: left;
+   margin-left : -30px;
+   margin-right : 10px;
+}
+.body > .student-button th, td{
+   margin-right: -1px;
+   height: 10px;
+}
+*/
 
