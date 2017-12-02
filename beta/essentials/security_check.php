@@ -75,6 +75,8 @@ This must be included in every partial other than login.php and forgotpw.php
 ?>
 <script>
   //JAVASCRIPT UPDATES THE TOKEN BASED ON THE NEW CHALLENGE AND CRYPTO KEY AND WRITES IT INTO THE COOKIE
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  alert("!!");
   $(document).ready(function(){
     //var sessionid = document.cookie.match('(^|;)\\s*PHPSESSID\\s*=\\s*([^;]+)');
     var sessionid = "<?php echo session_id();?>";
