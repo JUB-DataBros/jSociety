@@ -35,7 +35,7 @@ function loadPage(page) {
     //Cannot keep the log
     //$(".body").html("AJAX Request to page " + page + " failed: <br>");
     //$(".body").append("Data: <br>" + data);
-    loadPage("routes/feed.php"); //If feed fails, then infinite loop
+    loadPage("routes/feed.php"); //If 'feed' fails, then infinite loop
   });
 }
 

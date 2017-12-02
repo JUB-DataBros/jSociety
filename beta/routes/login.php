@@ -1,12 +1,20 @@
 <script src="js/login.js"></script>
 <script src="js/sha256.js"></script>
 <!-- Cannot be included directly from login.php -->
+<?php
+  if(isset($_COOKIE['username']) && isset($_COOKIE['token'])) {
+    echo "<script>loadPage('routes/feed.php');</script>";
+  }
+  else {
+    echo "<script>localStorage.removeItem('crypto_key');</script>";
+  }
+?>
 <script>localStorage.removeItem("crypto_key");</script>
 <?php
   session_start();
   include("essentials/db.php");
   if($_SESSION['authentication'] == 1) {
-    echo "<script>loadPage('routes/feed.php');</script>";
+    die("<script>loadPage('routes/feed.php');</script>");
   }
   $s = False;
   $timeout = 0;
@@ -16,7 +24,6 @@
     $timeout++;
   }
   if($s == True) {
-    //echo "<script>$('document').ready(function(){alert(document.cookie);});</script>"; //!!!!!!!!!!!!!! COOKIE DOES NOT INCLUDE THE CHALLENGE COOKIE !!!!!!!!!!!!!!!!!
     $_SESSION['crypto_challenge'] = $new_challenge;
     setcookie("challenge", $_SESSION['crypto_challenge'],0 ,"/jSociety/beta/"); //To be changed upon deployment
   }
@@ -48,10 +55,11 @@
 </form>
 
 <script>
-  if (localStorage.getItem("username") !== null) {
-    //alert("found");
-    document.getElementById("login_username").value = localStorage.getItem("username");
-    //Auto-fill username if previously existed
-    //ALSO IMPLEMENT TO FORGOTPW.PHP PAGE
-  }
+    var sessionid = "<?php echo session_id();?>";
+    var crypto_challenge = "<?php echo $_SESSION['crypto_challenge'];?>";
+    if (localStorage.getItem("username") !== null) {
+      document.getElementById("login_username").value = localStorage.getItem("username");
+      //Auto-fill username if previously existed
+      //ALSO IMPLEMENT TO FORGOTPW.PHP PAGE
+    }
 </script>

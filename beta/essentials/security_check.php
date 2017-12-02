@@ -1,7 +1,6 @@
 <!--
 This must be included in every partial other than login.php and forgotpw.php
-//Those partial pages will not run if $_GET['token'] is not valid
-//login.php creates its own (crypto) challenge
+//login.php creates its own crypto challenge
 -->
 <?php
   SESSION_START();
@@ -11,39 +10,43 @@ This must be included in every partial other than login.php and forgotpw.php
     //Fetch salted password from DB
     //Don't keep the salted password in a SESSION variable
     $salt = hash("sha256", "jSociety by DataBros", false);
-    $password = substr($_COOKIE['username'], 0, 3) + "123";
-    $salted_password = hash("sha256", $_COOKIE['username'] . $salt . $password);
+    $password = substr($_COOKIE['username'], 0, 3) . "123";
     //In this test case, password for each username starts with
-    //the first 3 letters of the username and followed by "123",
+    //the first 3 letters of the username and followed by "123"
+    $salted_password = hash("sha256", $_COOKIE['username'] . $salt . $password, false);
     //Normally fetch salted_password from the database
 
-
-    if($_COOKIE['token'] ===
-       hash("sha256", hash("sha256", $_COOKIE['username']
-                                   + $salted_password
-                                   + session_id())
-                    + $_SESSION['crypto_challenge']
-                   //Fetch the crypto_challenge from the session, not from the cookie
-                   //Cookie might be tampered
-      )
-    ) {
+    //Expected crypto key
+    $crypto_key = hash("sha256", $_COOKIE['username'] . $salted_password . session_id(), false);
+    //Expected token
+    $token = hash("sha256", $crypto_key . $_SESSION['crypto_challenge'], false);
+    //For comparison with user-side script
+    //die($_COOKIE['username'] . "<br>" . $salt . "<br>" . $password . "<br>" . $salted_password . "<br>" . session_id() . "<br>" . $crypto_key . "<br>" . $_SESSION['crypto_challenge'] . "<br>" . $token . "<br>");
+    //echo $_COOKIE['username'] . "<br>" . $salt . "<br>" . $password . "<br>" . $salted_password . "<br>" . session_id() . "<br>" . $crypto_key . "<br>" . $_SESSION['crypto_challenge'] . "<br>" . $token . "<br>";
+    //Compare
+    if($_COOKIE['token'] === $token) {
       $_SESSION['authentication'] = 1;
       $_SESSION['username'] = $_COOKIE['username']; //It will be needed
       //$_SESSION['userid'] = ... Fetch user ID here !!!!!!!!!!!!!!1
-      include("sidebar.php");
+      include("sidebar.php"); //DOESNT WORK !!!!!!!!!!!!!!!!!
       //Only end that doesn't die()
     }
     else {
       $_SESSION['authentication'] = -1;
       unset($_SESSION['username']);
       unset($_SESSION['userid']);
-      die($error_script);
+      //Remove the incorrect cookie values username and token
+      setcookie("username", $_SESSION['crypto_challenge'], time()-3600, "/jSociety/beta/");
+      setcookie("token", $_SESSION['crypto_challenge'], time()-3600, "/jSociety/beta/");
+      //Because if these cookies are present login.php redirects to feed.php that includes this page
+      //In case the user was already logged in but opens login.php
+      die($error_script); //Reload login page
       //Deny Authentication !
     }
   }
   else {
     $_SESSION['authentication'] = 0;
-    die($error_script);
+    die($error_script); //Reload login page
     //Deny authentication and redirect to login with $_GET['page']
   }
 
@@ -59,7 +62,6 @@ This must be included in every partial other than login.php and forgotpw.php
   if($s == True) {
     $_SESSION['crypto_challenge'] = $new_challenge;
     setcookie("challenge", $_SESSION['crypto_challenge'], 0, "/jSociety/beta/"); //To be changed upon deployment
-    //Not sure if 3600 is in seconds
     //Session and cookie are always syncronized on the crypto challenge
     //Thats why always use those two to refer the crypto challenge
     //Do not use hidden form input
@@ -73,12 +75,17 @@ This must be included in every partial other than login.php and forgotpw.php
 ?>
 <script>
   //JAVASCRIPT UPDATES THE TOKEN BASED ON THE NEW CHALLENGE AND CRYPTO KEY AND WRITES IT INTO THE COOKIE
-  //var sessionid = document.cookie.match('(^|;)\\s*PHPSESSID\\s*=\\s*([^;]+)');
-  var sessionid = "<?php echo session_id();?>";
-  var username = localStorage.getItem("username");
-  var crypto_challenge = document.cookie.match('(^|;)\\s*challenge\\s*=\\s*([^;]+)');
-  var token = CryptoJS.SHA256(localStorage.getItem("crypto_key") + crypto_challenge);
+  $(document).ready(function(){
+    //var sessionid = document.cookie.match('(^|;)\\s*PHPSESSID\\s*=\\s*([^;]+)');
+    var sessionid = "<?php echo session_id();?>";
+    var username = localStorage.getItem("username");
+    //var crypto_challenge = document.cookie.match(new RegExp('challenge' + '=([^;]+)'))[1];
+    var crypto_challenge = "<?php echo $_SESSION['crypto_challenge'];?>";
+    var token = CryptoJS.SHA256(localStorage.getItem("crypto_key") + crypto_challenge);
+    //CryptoJS cannot be accessed in the following times !!!!!!!!!!!!!!
+    //That's why security protocols also fail
 
-  document.cookie = "username=" + username;
-  document.cookie = "token=" + token;
+    document.cookie = "username=" + username;
+    document.cookie = "token=" + token;
+  });
 </script>
