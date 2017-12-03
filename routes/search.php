@@ -9,24 +9,25 @@
 // looks the club and hobby name
 $sql["club"] = "SELECT C.NAME AS cname, C.ID AS cid, H.NAME AS hname
 	FROM JSO_CLUB  C INNER JOIN JSO_HOBBY H ON C.FOCUS = H.ID
-	WHERE C.NAME = %:keyword% OR H.NAME = %:keyword%";
+	WHERE C.NAME LIKE % :keyword % OR H.NAME LIKE % :keyword %";
 // looks the student name, college name, major name
 $sql["student"] = "SELECT S.NAME AS sname, S.ID AS sid, M.NAME AS mname, CO.NAME AS coname, S.EMAIL AS email
 	FROM ((JSO_STUDENT S INNER JOIN JSO_MAJOR M ON M.ID = S.MAJOR)
 			   INNER JOIN JOS_COLLEGE ON CO.ID = S.COLLEGE)
-	WHERE S.EMAIL = %:keyword% S.NAME = %:keyword% OR M.NAME = %:keyword% OR CO.NAME = %:keyword%";
+	WHERE S.EMAIL LIKE % :keyword % S.NAME LIKE % :keyword % OR M.NAME LIKE %  :keyword% OR CO.NAME LIKE % :keyword %";
 // Looks the Event name, description and the club name
 $sql["event"] = "SELECT C.NAME AS cname, E.ID AS eid, E.NAME AS ename, E.STARTIME as start, E.ENDTIME as end, COUNT(S.ID), E.DETAIL as detail
 	FROM (((JSO_EVENT E INNER JOIN JSO_CLUB C ON C.ID = E.ORGANIZEDBY)
 			 INNER JOIN JSO_STUDENT_EVENT SE ON SE.EVENTID = E.ID)
 			 INNER JOIN JSO_STUDENT S ON SE.STUDENTID = S.ID)
-	WHERE (E.NAME = %:keyword% OR E.DETAIL = %:keyword% OR C.NAME = %:keyword%) AND E.ENDTIME > NOW()
+	WHERE (E.NAME LIKE % :keyword % OR E.DETAIL LIKE % :keyword % OR C.NAME LIKE % :keyword %) AND E.ENDTIME > NOW()
 	ORDER BY E.STARTTIME DESC";
 
 $arg = array(':keyword' => $_GET["keyword"]);
 
 foreach($sql as $key => $search){
 	//$query[$key] = runSQL($sql[$key], $arg);
+	//$result[$key] = $query[$key]->fetchAll(); 
 }
 
 ?>
@@ -56,17 +57,9 @@ foreach($sql as $key => $search){
 <h2>STUDENT</h2>
 <hr>
 <div class ="student-button">
+	<button name="someid" onclick="sidebarClick('getuser')">
+<!--	<button name="someid" onclick="load('getuser', $('#someid').val())">  -->
 
-	<button name="someid" onclick="load('getuser', $('#someid').val())">
-<!--
-		<table>
-		<tr><td></td><td>userName</td></tr>
-	
-		<tr><th><img src="images/diploma.png"></th><th>Event Name</th></tr>
-		<tr><th><img src="images/house.png"></th><th>Event Name</th></tr>
-		<tr><th><img src="images/email.png"></th><th>someemila@jacobs-university.de</th></tr>
-		</table>
--->
 		Event Name<hr>
 		<ul>
   			<li class="major">IEM</li>
@@ -76,15 +69,7 @@ foreach($sql as $key => $search){
 		
 	</button>
 	<button name="someid" onclick="load('getuser', $('#someid').val())">
-<!--
-		<table>
-		<tr><td></td><td>userName</td></tr>
-	
-		<tr><th><img src="images/diploma.png"></th><th>Event Name</th></tr>
-		<tr><th><img src="images/house.png"></th><th>Event Name</th></tr>
-		<tr><th><img src="images/email.png"></th><th>someemila@jacobs-university.de</th></tr>
-		</table>
--->
+
 		Event Name<hr>
 		<ul>
   			<li class="major">IEM</li>
@@ -94,15 +79,7 @@ foreach($sql as $key => $search){
 		
 	</button>
 	<button name="someid" onclick="load('getuser', $('#someid').val())">
-<!--
-		<table>
-		<tr><td></td><td>userName</td></tr>
-	
-		<tr><th><img src="images/diploma.png"></th><th>Event Name</th></tr>
-		<tr><th><img src="images/house.png"></th><th>Event Name</th></tr>
-		<tr><th><img src="images/email.png"></th><th>someemila@jacobs-university.de</th></tr>
-		</table>
--->
+
 		Event Name<hr>
 		<ul>
   			<li class="major">IEM</li>
@@ -112,15 +89,7 @@ foreach($sql as $key => $search){
 		
 	</button>
 	<button name="someid" onclick="load('getuser', $('#someid').val())">
-<!--
-		<table>
-		<tr><td></td><td>userName</td></tr>
-	
-		<tr><th><img src="images/diploma.png"></th><th>Event Name</th></tr>
-		<tr><th><img src="images/house.png"></th><th>Event Name</th></tr>
-		<tr><th><img src="images/email.png"></th><th>someemila@jacobs-university.de</th></tr>
-		</table>
--->
+
 		Event Name<hr>
 		<ul>
   			<li class="major">IEM</li>
