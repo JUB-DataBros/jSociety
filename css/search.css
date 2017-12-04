@@ -1,0 +1,133 @@
+/*Search Page*/
+/*Taken from https://www.w3schools.com/howto/howto_css_animated_search.asp*/
+input[type=text].search {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url("search.png");
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text].search:focus {
+    width: 60%;
+}
+
+
+/*For Displaying Clubs in Search Page*/
+.body > .club-button{
+  margin-right: 40%;
+  margin-left: 2%;
+}
+
+.body > .club-button button {
+    display:inline-block;
+    margin-right:5px;
+    margin-bottom:5px;
+    border: 2px solid #87CEEB;
+    background-color: white;
+    padding: 14px 40px; /* Some padding */
+    color: black; /* White text */
+    text-align: center;
+    cursor: pointer; /* Pointer/hand icon */
+    width: 30%;
+    height: 10%;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+
+/* Add a background color on hover */
+.body > .club-button button:hover {
+   background-color: #6A5ACD; /* Light-Blue */
+   /*color: white;*/
+}
+
+/*For Displaying Events in Search Page*/
+.body > .event-table{
+     margin-right:40%;
+     height: 500px;
+     overflow:auto;
+}
+
+.body > .event-table table, th, td{
+   padding: 10px;
+   text-align: left;
+}
+.body > .event-table th, td{
+   width: 19%;
+   height: 40px;
+   border-bottom: 1px solid #ddd;
+}
+
+.body > .event-table button{
+   background-color: white;
+   padding: 0px 0px;
+   border: none;
+   /*text-align: left;*/
+}
+
+.body > .event-table button:hover {
+    background-color: #DCDCDC;
+}
+
+.body > .header-event-table {
+   margin-right: 40%;
+   background-color: lightblue;
+   color: gray;
+}
+
+/*For Displaying Students in Search Page*/
+.body > .student-button{
+ margin-right: 40%;
+}
+
+.body > .student-button hr {
+   margin-bottom: -10px;
+   border: 0;
+   height: 0;
+   border-top: 1px solid rgba(0, 0, 0, 0.3);
+   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/*We display the result as list*/
+/*url(".../images/picuter.png") didn't worked
+url("images/picuter.png") didn't worked aswell*/
+.body > .student-button li.major{
+    list-style: circle inside url("diploma.png");
+    background-repeat: no-repeat;
+}
+.body > .student-button li.college{
+    list-style: circle inside url("house.png");
+    background-repeat: no-repeat;
+}
+.body > .student-button li.email{
+    list-style: circle inside url("email.png");
+    background-repeat: no-repeat;
+}
+.body > .student-button ul{
+ margin-left: -60px;
+ margin-right: -40px;
+ margin-bottom: -5px;
+}
+/*Generated list displayed inside the Button*/
+.body > .student-button button{
+    background-color: white;
+    display:inline-block;
+    margin-right:5px;
+    margin-bottom:5px;
+    border: 2px solid #87CEEB;
+    background-color: white;
+    padding: 14px 40px; /* Some padding */
+    color: black; /* White text */
+    text-align: left;
+    cursor: pointer; /* Pointer/hand icon */
+    width: 47%;
+    height: 10%;
+    border-radius: 8px;
+}
