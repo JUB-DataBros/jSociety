@@ -17,18 +17,19 @@
       if($_SESSION['authentication'] == 1) {
       //$_SESSION['authentication'] is only used to direct to the correct page
       //Not for security purpose. Security is handled in individual pages
-          switch($_GET['page']){
-            case "feed":
-            case "profile":
-            case "events":
-            case "clubs":
-            case "settings":
-            case "disclaimer":
-              echo "<script>loadPage('routes/" . $_GET['page'] . ".php');</script>";
-              break;
-            default:
-              echo "<script>loadPage('routes/feed.php');</script>";
-          }
+        include('partials/sidebar.php');
+        switch($_GET['page']){
+          case "feed":
+          case "profile":
+          case "events":
+          case "clubs":
+          case "settings":
+          case "disclaimer":
+            echo "<script>loadPage('routes/" . $_GET['page'] . ".php');</script>";
+            break;
+          default:
+            echo "<script>loadPage('routes/feed.php');</script>";
+        }
       }
       else {
         echo "<script>loadPage('routes/login.php');</script><br>";

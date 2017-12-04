@@ -5,7 +5,7 @@ This must be included in every partial other than login.php and forgotpw.php
 <?php
   SESSION_START();
   $getPage = isset($_GET['page']) ? "?page=" . $_GET['page'] : "";
-  $error_script = "<script>loadPage('index.php" . $getPage . "'); location.replace('index.php');</script>";
+  $error_script = "<script>loadPage('routes/login.php" . $getPage . "');</script>";
   if(isset($_COOKIE['username']) && isset($_COOKIE['token'])) {
     //Fetch salted password from DB
     //Don't keep the salted password in a SESSION variable
@@ -25,12 +25,12 @@ This must be included in every partial other than login.php and forgotpw.php
     //echo $_COOKIE['username'] . "<br>" . $salt . "<br>" . $password . "<br>" . $salted_password . "<br>" . session_id() . "<br>" . $crypto_key . "<br>" . $_SESSION['crypto_challenge'] . "<br>" . $token . "<br>";
     //Compare
     if($_COOKIE['token'] === $token) {
-      include('../partials/sidebar.php');
       $_SESSION['authentication'] = 1;
       $_SESSION['username'] = $_COOKIE['username']; //It will be needed
       //$_SESSION['userid'] = ... Fetch user ID here !!!!!!!!!!!!!!1
       //$_SESSION['type'] = ... Fetch type of the user here. 0 for admin 1 for user
-      include("sidebar.php"); //DOESNT WORK !!!!!!!!!!!!!!!!!
+      //Load the sidebarClick
+      echo "<script>if(sidebarLoaded == 0){loadSidebar();}</script>";
       //Only end that doesn't die()
     }
     else {

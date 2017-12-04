@@ -47,3 +47,21 @@ function sidebarClick(page) {
   loadPage("routes/" + page + ".php");
   changeURL("?page=" + page);
 }
+
+var sidebarLoaded = 0;
+function loadSidebar() {
+  $.ajax({
+    method: "POST",
+    url: "partials/sidebar.php",
+    data: {}
+  })
+
+  .done(function(data) {
+    $(".header").after(data);
+    sidebarLoaded = 1;
+  })
+
+  .fail(function(data) {
+    alert("Sidebar could not be loaded. Please refresh your page");
+  });
+}

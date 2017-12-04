@@ -26,11 +26,14 @@ function loginAttempt(redirect) {
     //alert(username + "\n" + salt + "\n" + $("#login_password").val() + "\n" + salted_password + "\n" + sessionid + "\n" + crypto_key + "\n" + crypto_challenge  + "\n" + token + "\n");
     //Remove this^ comment upon deployment !
     if(redirect == "") {
+      //loadSidebar();
       loadPage("routes/feed.php");
+      //window.location = "index.php";
     }
     else {
       loadPage("routes/" + redirect + ".php");
       changeURL("?page=" + redirect);
+      //window.location = "index.php?page=" + redirect;
     }
   //};
 }

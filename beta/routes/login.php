@@ -1,5 +1,4 @@
 <script src="js/login.js"></script>
-<!-- Cannot be included directly from login.php -->
 <?php
   if(isset($_COOKIE['username']) && isset($_COOKIE['token'])) {
     echo "<script>loadPage('routes/feed.php');</script>";
@@ -34,6 +33,7 @@
 
 <form method="POST" style="margin-left:20%;margin-top:15%">
   <?php
+    //echo $_SESSION['authentication'] . "<br>";
     if($_SESSION['authentication'] == -1) {
       echo "<div style='color:red'>Incorrect Username or Password</div><br>";
       $_SESSION['authentication'] = 0;
@@ -48,7 +48,7 @@
       onclick="loginAttempt(<?php echo isset($_GET['page']) ? $_GET['page'] : "''";?>)">
       <?php //Handle redirection upon non-logged-on page request ?>
   <br><br>
-  <a name="forgotpwlink" style="margin-left:30px; color:red" onClick="loadPage('routes/forgotpw.php<?php echo isset($_GET['page']) ? "?page=" . $_GET['page'] : "";?>')">Forgot your password?</a>
+  <a name="forgotpwlink" style="margin-left:30px; color:royalblue" onClick="loadPage('routes/forgotpw.php<?php echo isset($_GET['page']) ? "?page=" . $_GET['page'] : "";?>')">Forgot your password?</a>
   <?php //Carry $_GET['page'] across pages ?>
 
 </form>
