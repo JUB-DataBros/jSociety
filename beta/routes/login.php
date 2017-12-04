@@ -31,12 +31,16 @@
   }
 ?>
 
-<form method="POST" style="margin-left:20%;margin-top:15%">
+<form method="POST" style="margin-left:20%;margin-top:10%">
   <?php
     //echo $_SESSION['authentication'] . "<br>";
     if($_SESSION['authentication'] == -1) {
-      echo "<div style='color:red'>Incorrect Username or Password</div><br>";
+      echo "<div style='color:red;margin-left:-1.5%'>Incorrect Username or Password</div><br>";
       $_SESSION['authentication'] = 0;
+    }
+    else {
+      echo "<div style='color:green;margin-left:3.5%'>Enter your credentials</div><br>"; //So the form position will remain the same
+      //regardless of whether there is the incorrect credentials message
     }
   ?>
   <input type="text" id="login_username" placeholder="e-mail address">

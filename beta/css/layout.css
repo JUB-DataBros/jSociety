@@ -16,14 +16,14 @@ body{
 .header > a {
   position: relative;
   height: 100%;
-  left: 15%;
+  left: 7%;
   top: 10%;
   text-decoration: none;
 }
 
 .header > h1 {
   position: relative;
-  left: 18%;
+  left: 14%;
   top: -25%;
   display: inline-block;
 }

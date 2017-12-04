@@ -31,10 +31,31 @@ This must be included in every partial other than login.php and forgotpw.php
       //$_SESSION['type'] = ... Fetch type of the user here. 0 for admin 1 for user
       //Load the sidebarClick
       echo "<script>if(sidebarLoaded == 0){loadSidebar();}</script>";
+      $_SESSION['quickRefreshTolerance'] = 10;
       //Only end that doesn't die()
     }
     else {
-      $_SESSION['authentication'] = -1;
+      //AUTO-LOGIN
+      //If the user is forced to log out due to quick page refreshing
+      //Try to automatically log in again for the first occurence of this
+      //Auto-login will refresh the page up to 10 times until login is successful
+      if($_SESSION['authentication'] == 1 && $_SESSION['quickRefreshTolerance'] > 0) {
+        echo "<script>document.ready(solveChallenge());</script>";
+        $_SESSION['quickRefreshTolerance']--; //After 10 times do not try auto-login again
+        //Excessive quick refreshing will still result in logging OutOfBoundsException
+        //Reload the page to try to authenticate
+        //Based on the local storage values (username, crypto_key)
+        echo "<script>document.ready(location.reload());</script>";
+      }
+      else if($_SESSION['authentication'] == 1) {
+        //In case still logs out, do not output an incorrect credential message
+        $_SESSION['authentication'] == 0;
+      }
+      else {
+        //If not forced-logout, output the incorrect credential message
+        $_SESSION['authentication'] = -1;
+      }
+
       unset($_SESSION['username']);
       unset($_SESSION['userid']);
       //Remove the incorrect cookie values username and token
@@ -43,7 +64,7 @@ This must be included in every partial other than login.php and forgotpw.php
       //Because if these cookies are present login.php redirects to feed.php that includes this page
       //In case the user was already logged in but opens login.php
       die($error_script); //Reload login page
-      //Deny Authentication !
+      //Deny authentication and redirect to login with $_GET['page']
     }
   }
   else {
@@ -58,7 +79,7 @@ This must be included in every partial other than login.php and forgotpw.php
   $timeout = 0;
   while($s == False && timeout < 10) {
     $new_challenge = hash("sha256", bin2hex(openssl_random_pseudo_bytes(256, $s)), false);
-    // if the random number is cryptographically secure, $s is set True
+    //If the random number is cryptographically secure, $s is set True
     $timeout++;
   }
   if($s == True) {
@@ -76,8 +97,9 @@ This must be included in every partial other than login.php and forgotpw.php
   }
 ?>
 <script>
+  $(document).ready(solveChallenge());
   //JAVASCRIPT UPDATES THE TOKEN BASED ON THE NEW CHALLENGE AND CRYPTO KEY AND WRITES IT INTO THE COOKIE
-  $(document).ready(function(){
+  function solveChallenge() {
     //var sessionid = document.cookie.match('(^|;)\\s*PHPSESSID\\s*=\\s*([^;]+)');
     var sessionid = "<?php echo session_id();?>";
     var username = localStorage.getItem("username");
@@ -89,5 +111,5 @@ This must be included in every partial other than login.php and forgotpw.php
 
     document.cookie = "username=" + username;
     document.cookie = "token=" + token;
-  });
+  }
 </script>
