@@ -3,6 +3,7 @@
   <head>
     <title>jSociety</title>
     <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/search.css">
   </head>
   <body>
     <?php
