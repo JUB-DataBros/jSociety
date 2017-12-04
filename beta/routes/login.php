@@ -48,7 +48,7 @@
       onclick="loginAttempt(<?php echo isset($_GET['page']) ? $_GET['page'] : "''";?>)">
       <?php //Handle redirection upon non-logged-on page request ?>
   <br><br>
-  <a name="forgotpwlink" style="margin-left:30px" onClick="loadPage('routes/forgotpw.php<?php echo isset($_GET['page']) ? "?page=" . $_GET['page'] : "";?>')">Forgot your password?</a>
+  <a name="forgotpwlink" style="margin-left:30px; color:red" onClick="loadPage('routes/forgotpw.php<?php echo isset($_GET['page']) ? "?page=" . $_GET['page'] : "";?>')">Forgot your password?</a>
   <?php //Carry $_GET['page'] across pages ?>
 
 </form>

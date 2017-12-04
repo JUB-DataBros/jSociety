@@ -25,9 +25,11 @@ This must be included in every partial other than login.php and forgotpw.php
     //echo $_COOKIE['username'] . "<br>" . $salt . "<br>" . $password . "<br>" . $salted_password . "<br>" . session_id() . "<br>" . $crypto_key . "<br>" . $_SESSION['crypto_challenge'] . "<br>" . $token . "<br>";
     //Compare
     if($_COOKIE['token'] === $token) {
+      include('partials/header.php');
       $_SESSION['authentication'] = 1;
       $_SESSION['username'] = $_COOKIE['username']; //It will be needed
       //$_SESSION['userid'] = ... Fetch user ID here !!!!!!!!!!!!!!1
+      //$_SESSION['type'] = ... Fetch type of the user here. 0 for admin 1 for user
       include("sidebar.php"); //DOESNT WORK !!!!!!!!!!!!!!!!!
       //Only end that doesn't die()
     }
