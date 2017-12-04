@@ -13,7 +13,7 @@
     <script src="js/sha256.js"></script>
     <?php
       SESSION_START();
-      include('partials/header.php');
+      //include('partials/header.php');
       if($_SESSION['authentication'] == 1) {
       //$_SESSION['authentication'] is only used to direct to the correct page
       //Not for security purpose. Security is handled in individual pages
