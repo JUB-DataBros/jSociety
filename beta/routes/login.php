@@ -1,5 +1,4 @@
 <script src="js/login.js"></script>
-<script src="js/sha256.js"></script>
 <!-- Cannot be included directly from login.php -->
 <?php
   if(isset($_COOKIE['username']) && isset($_COOKIE['token'])) {

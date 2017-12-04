@@ -9,6 +9,7 @@
   <body>
     <script src="js/jquery.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/sha256.js"></script>
     <?php
       SESSION_START();
       include('partials/header.php');
