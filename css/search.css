@@ -7,7 +7,7 @@ input[type=text].search {
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
-    background-image: url("search.png");
+    background-image: url("../images/searchs.png");
     background-position: 10px 10px;
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
@@ -99,15 +99,15 @@ input[type=text].search:focus {
 /*url(".../images/picuter.png") didn't worked
 url("images/picuter.png") didn't worked aswell*/
 .body > .student-button li.major{
-    list-style: circle inside url("diploma.png");
+    list-style: circle inside url("../images/diploma.png");
     background-repeat: no-repeat;
 }
 .body > .student-button li.college{
-    list-style: circle inside url("house.png");
+    list-style: circle inside url("../images/house.png");
     background-repeat: no-repeat;
 }
 .body > .student-button li.email{
-    list-style: circle inside url("email.png");
+    list-style: circle inside url("../images/email.png");
     background-repeat: no-repeat;
 }
 .body > .student-button ul{

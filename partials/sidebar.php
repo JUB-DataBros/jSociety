@@ -1,5 +1,5 @@
 <div class="sidebar">
-  <input id="search" type="text" placeholder="Search">
+  <input id="searchinp" type="text" placeholder="Search">
 
   <button type="image" id="search" onclick="sidebarClick('search')"><img src="images/search.png"></button><br><!--needs to be changes -->
   <button type="button" class="side-button" name="feed" onclick="sidebarClick('feed')">Feed</button><br>
