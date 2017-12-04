@@ -29,12 +29,12 @@ function runSQL($sql, $args) {
 
 function writeLOG($action) {
   //Notice that if type is not 'set', then it writes into ADMINLOG table with empty username
-  //username in ADMINTABLE must be able to be NULL !!!!!!!!!!!!!!!!!!!!! 
-  if($_SESSION['type'] == 0) { //ADMINLOG --> username
+  //username in ADMINTABLE must be able to be NULL !!!!!!!!!!!!!!!!!!!!!
+  if($_SESSION['usertype'] == 0) { //ADMINLOG --> username
     $logq = $db->prepare("INSERT INTO JSO_ADMINLOG VALUES(USERNAME = ':username', ACTION = ':action')");
     $logq->execute(array(':username' => $_SESSION['username'], ':action' => $action)); //Cannot handle error here
   }
-  elseif($_SESSION['type'] == 1) { //STUDENTLOG --> id
+  elseif($_SESSION['usertype'] == 1) { //STUDENTLOG --> id
     $logq = $db->prepare("INSERT INTO JSO_STUDENTLOG VALUES(ID = ':username', ACTION = ':action')");
     $logq->execute(array(':username' => $_SESSION['id'], ':action' => $action)); //Cannot handle error here
   }

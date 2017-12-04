@@ -7,7 +7,6 @@
     echo "<script>localStorage.removeItem('crypto_key');</script>";
   }
 ?>
-<script>localStorage.removeItem("crypto_key");</script>
 <?php
   session_start();
   include("essentials/db.php");

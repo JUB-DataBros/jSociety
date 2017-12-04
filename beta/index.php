@@ -17,7 +17,8 @@
       if($_SESSION['authentication'] == 1) {
       //$_SESSION['authentication'] is only used to direct to the correct page
       //Not for security purpose. Security is handled in individual pages
-        include('partials/sidebar.php');
+        //include('partials/sidebar.php');
+        //echo <
         switch($_GET['page']){
           case "feed":
           case "profile":
@@ -36,6 +37,5 @@
       }
     ?>
     <div class="body"></div>
-
   </body>
 </html>

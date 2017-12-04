@@ -52,7 +52,8 @@ var sidebarLoaded = 0;
 //Also loads the log-out button on the header
 function loadSidebar() {
   //Load the log-out button
-  var logoutbutton = "<a href='logout.php' style='margin-left:68%'><img class='logout' src='images/logout.png' alt='Log out?'></a>";
+  //It needsan hyperlink so to align with the logo due to CSS code
+  var logoutbutton = "<a><img id='logout' style='margin-left:68%' src='images/logout.png' alt='Log out?' onClick=\"loadPage('essentials/logout.php')\"></a>";
   $(".header").append(logoutbutton);
   //Load the sidebar
   $.ajax({
@@ -69,4 +70,5 @@ function loadSidebar() {
   .fail(function(data) {
     alert("Sidebar could not be loaded. Please refresh your page");
   });
+
 }

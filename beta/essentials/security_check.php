@@ -28,7 +28,7 @@ This must be included in every partial other than login.php and forgotpw.php
       $_SESSION['authentication'] = 1;
       $_SESSION['username'] = $_COOKIE['username']; //It will be needed
       //$_SESSION['userid'] = ... Fetch user ID here !!!!!!!!!!!!!!1
-      //$_SESSION['type'] = ... Fetch type of the user here. 0 for admin 1 for user
+      //$_SESSION['usertype'] = ... Fetch type of the user here. 0 for admin 1 for user
       //Load the sidebarClick
       echo "<script>if(sidebarLoaded == 0){loadSidebar();}</script>";
       $_SESSION['quickRefreshTolerance'] = 10;
@@ -40,7 +40,7 @@ This must be included in every partial other than login.php and forgotpw.php
       //Try to automatically log in again for the first occurence of this
       //Auto-login will refresh the page up to 10 times until login is successful
       if($_SESSION['authentication'] == 1 && $_SESSION['quickRefreshTolerance'] > 0) {
-        echo "<script>document.ready(solveChallenge());</script>";
+        echo "<script>alert('!'); document.ready(solveChallenge());</script>";
         $_SESSION['quickRefreshTolerance']--; //After 10 times do not try auto-login again
         //Excessive quick refreshing will still result in logging OutOfBoundsException
         //Reload the page to try to authenticate
@@ -58,9 +58,10 @@ This must be included in every partial other than login.php and forgotpw.php
 
       unset($_SESSION['username']);
       unset($_SESSION['userid']);
+      unset($_SESSION['usertype']);
       //Remove the incorrect cookie values username and token
-      setcookie("username", $_SESSION['crypto_challenge'], time()-3600, "/jSociety/beta/");
-      setcookie("token", $_SESSION['crypto_challenge'], time()-3600, "/jSociety/beta/");
+      setcookie("username", "", time()-3600, "/jSociety/beta/");
+      setcookie("token", "", time()-3600, "/jSociety/beta/");
       //Because if these cookies are present login.php redirects to feed.php that includes this page
       //In case the user was already logged in but opens login.php
       die($error_script); //Reload login page
@@ -106,8 +107,6 @@ This must be included in every partial other than login.php and forgotpw.php
     //var crypto_challenge = document.cookie.match(new RegExp('challenge' + '=([^;]+)'))[1];
     var crypto_challenge = "<?php echo $_SESSION['crypto_challenge'];?>";
     var token = CryptoJS.SHA256(localStorage.getItem("crypto_key") + crypto_challenge);
-    //CryptoJS cannot be accessed in the following times !!!!!!!!!!!!!!
-    //That's why security protocols also fail
 
     document.cookie = "username=" + username;
     document.cookie = "token=" + token;
