@@ -9,7 +9,9 @@ This must be included in every partial other than login.php and forgotpw.php
   if(isset($_COOKIE['username']) && isset($_COOKIE['token'])) {
     //Fetch salted password from DB
     //Don't keep the salted password in a SESSION variable
-    $salt = hash("sha256", "jSociety by DataBros", false);
+    //$salt = hash("sha256", "jSociety by DataBros", false);
+    //The same as above but no need to compute every time
+    $salt = "98866a88c5fb4683636443dfb0e7d2a67c892baadc65749edad0fa5d588f7d6b";
     $password = substr($_COOKIE['username'], 0, 3) . "123";
     //In this test case, password for each username starts with
     //the first 3 letters of the username and followed by "123"

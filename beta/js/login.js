@@ -6,7 +6,9 @@ function loginAttempt(redirect) {
     //var crypto_challenge = document.cookie.match('(^|;)\\s*challenge\\s*=\\s*([^;]+)');
     //var sessionid = document.cookie.match('(^|;)\\s*PHPSESSID\\s*=\\s*([^;]+)');
     var username = $("#login_username").val();
-    var salt = CryptoJS.SHA256("jSociety by DataBros");
+    //var salt = CryptoJS.SHA256("jSociety by DataBros");
+    //The same as above but no need to compute every time
+    var salt = "98866a88c5fb4683636443dfb0e7d2a67c892baadc65749edad0fa5d588f7d6b";
     var salted_password =
       CryptoJS.SHA256(username + salt + $("#login_password").val());
       //Do not store $("#login_password").val() in a variable
