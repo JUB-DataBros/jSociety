@@ -1,5 +1,5 @@
 <?php
-$config = parse_ini_file("../../../db.ini");
+$config = parse_ini_file("{$_SERVER['DOCUMENT_ROOT']}/../db.ini");
 
 $db = new PDO("{$config['driver']}:dbname={$config['dbname']};host={$config['host']};charset={$config['charset']}", $config['username'], $config['password']);
 
