@@ -12,10 +12,11 @@ function runSQL($sql, $args) {
   * $sql  : Parametered statement. Parametes should be written as ":parameter_name"
   * $args : Associative array of parameters. Syntax: array(":parameter_name" => "value", ...)
   */
+  global $db;
   $query = $db->prepare($sql);
 
   if(!$query -> execute($args)) {
-    writeLOG("FAIL SQL Query: " . $sql . " Error: " . mysql_error());
+    writeLOG("FAIL SQL Query: " . $sql . " Error: " . $db->errorCode());
   }
   else {
     writeLOG("SUCCESS SQL Query: " . $sql);
@@ -27,6 +28,7 @@ function runSQL($sql, $args) {
 }
 
 function writeLOG($action) {
+  global $db;
   if($_SESSION['type'] == 0) { //ADMINLOG --> username
     $logq = $db->prepare("INSERT INTO JSO_ADMINLOG VALUES(USERNAME = ':username', ACTION = ':action')");
     $logq->execute(array(':username' => $_SESSION['username'], ':action' => $action)); //Cannot handle error here
