@@ -11,11 +11,11 @@ function findGetParameter(parameterName) {
     return result;
 }
 
-function loadPage(page) {
+function loadPage(page, param={}) {
   $.ajax({
-    method: "POST",
+    method: "GET",
     url: page,
-    data: {}
+    data: param
   })
 
   .done(function(data) {
