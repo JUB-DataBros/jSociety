@@ -15,7 +15,7 @@
   }
   $s = False;
   $timeout = 0;
-  while($s == False && timeout < 10) {
+  while($s == False && $timeout < 10) {
     $new_challenge = hash("sha256", bin2hex(openssl_random_pseudo_bytes(256, $s)), false);
     // if the random number is cryptographically secure, $s is set True
     $timeout++;
