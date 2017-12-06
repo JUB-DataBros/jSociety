@@ -34,7 +34,6 @@
         echo "<script>loadPage('routes/login.php');</script>";
       }
     ?>
-    ?>
     <div class="body">
       <br>
     </div>

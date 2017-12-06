@@ -5,7 +5,7 @@ This must be included in every partial other than login.php and forgotpw.php
 <?php
   SESSION_START();
   $getPage = isset($_GET['page']) ? "?page=" . $_GET['page'] : "";
-  $error_script = "<script>loadPage('routes/login.php" . $getPage . "');</script>";
+  $error_script = "<script>$('div.sidebar').remove();$('img#logout').remove();loadPage('routes/login.php" . $getPage . "');</script>";
   if(isset($_COOKIE['username']) && isset($_COOKIE['token'])) {
     //Fetch salted password from DB
     //Don't keep the salted password in a SESSION variable

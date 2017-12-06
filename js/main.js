@@ -63,7 +63,7 @@ function loadSidebar() {
   if ($('img#logout').length == 0){
     //Load the log-out button
     //It needs a hyperlink so to align with the logo due to CSS code
-    var logoutbutton = "<a><img id='logout' src='images/logout.png' alt='Log out?' onClick=\"loadPage('essentials/logout.php')\"></a>";
+    var logoutbutton = "<img id='logout' src='images/logout.png' alt='Log out?' onClick=\"loadPage('essentials/logout.php')\">";
     $(".header").append(logoutbutton);
   }
 }
