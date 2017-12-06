@@ -30,6 +30,15 @@ body{
   display: inline-block;
 }
 
+.body {
+  position: absolute;
+  top: 18%;
+  left: 20%;
+  width: 79%;
+  height: 82%;
+  margin-left: 1%;
+}
+
 img {
   max-height: 75%;
 }
@@ -82,15 +91,6 @@ img {
   top: 5px;
   width: 10%;
   padding: 0;
-}
-
-.body {
-  position: absolute;
-  top: 18%;
-  left: 20%;
-  width: 79%;
-  height: 82%;
-  margin-left: 1%;
 }
 
 /*Pretty horizontal line*/
