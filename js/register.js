@@ -27,8 +27,8 @@ function loadCheckRegister() {
   $.ajax({
     method: "POST",
     url: "essentials/check_register.php",
-    data: {"fullname"=$("#register_fullname").val(), "username"=username,
-           "password"=salted_password, "redirect"=redirect}
+    data: {"fullname":$("#register_fullname").val(), "username":username,
+           "password":salted_password, "redirect":redirect}
   })
 
   .done(function(data) {
