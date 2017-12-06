@@ -33,31 +33,10 @@ This must be included in every partial other than login.php and forgotpw.php
       //$_SESSION['usertype'] = ... Fetch type of the user here. 0 for admin 1 for user
       //Load the sidebarClick
       echo "<script>if(sidebarLoaded == 0){loadSidebar();}</script>";
-      $_SESSION['quickRefreshTolerance'] = 10;
       //Only end that doesn't die()
     }
     else {
-      //AUTO-LOGIN
-      //If the user is forced to log out due to quick page refreshing
-      //Try to automatically log in again for the first occurence of this
-      //Auto-login will refresh the page up to 10 times until login is successful
-      if($_SESSION['authentication'] == 1 && $_SESSION['quickRefreshTolerance'] > 0) {
-        echo "<script>alert('!'); document.ready(solveChallenge());</script>";
-        $_SESSION['quickRefreshTolerance']--; //After 10 times do not try auto-login again
-        //Excessive quick refreshing will still result in logging OutOfBoundsException
-        //Reload the page to try to authenticate
-        //Based on the local storage values (username, crypto_key)
-        echo "<script>document.ready(location.reload());</script>";
-      }
-      else if($_SESSION['authentication'] == 1) {
-        //In case still logs out, do not output an incorrect credential message
-        $_SESSION['authentication'] == 0;
-      }
-      else {
-        //If not forced-logout, output the incorrect credential message
-        $_SESSION['authentication'] = -1;
-      }
-
+      $_SESSION['authentication'] = -1;
       unset($_SESSION['username']);
       unset($_SESSION['userid']);
       unset($_SESSION['usertype']);

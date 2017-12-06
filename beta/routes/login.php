@@ -1,4 +1,3 @@
-<script src="js/login.js"></script>
 <?php
   if(isset($_COOKIE['username']) && isset($_COOKIE['token'])) {
     echo "<script>loadPage('routes/feed.php');</script>";
@@ -6,8 +5,7 @@
   else {
     echo "<script>localStorage.removeItem('crypto_key');</script>";
   }
-?>
-<?php
+
   session_start();
   include("essentials/db.php");
   if($_SESSION['authentication'] == 1) {
@@ -30,7 +28,7 @@
   }
 ?>
 
-<form method="POST" style="margin-left:20%;margin-top:10%">
+<form method="POST" style="margin-left:20%;margin-top:5%">
   <?php
     //echo $_SESSION['authentication'] . "<br>";
     if($_SESSION['authentication'] == -1) {
@@ -38,7 +36,7 @@
       $_SESSION['authentication'] = 0;
     }
     else {
-      echo "<div style='color:green;margin-left:3.5%'>Enter your credentials</div><br>"; //So the form position will remain the same
+      echo "<div style='color:royalblue;margin-left:95px'>Login</div><br>"; //So the form position will remain the same
       //regardless of whether there is the incorrect credentials message
     }
   ?>
@@ -51,11 +49,12 @@
       onclick="loginAttempt(<?php echo isset($_GET['page']) ? $_GET['page'] : "''";?>)">
       <?php //Handle redirection upon non-logged-on page request ?>
   <br><br>
-  <a name="forgotpwlink" style="margin-left:30px; color:royalblue" onClick="loadPage('routes/forgotpw.php<?php echo isset($_GET['page']) ? "?page=" . $_GET['page'] : "";?>')">Forgot your password?</a>
+  <a name="forgotpwlink" style="margin-left:30px; color:darkorange" onClick="loadPage('routes/forgotpw.php<?php echo isset($_GET['page']) ? "?page=" . $_GET['page'] : "";?>')">Forgot your password?</a>
+  <br><br>
+  <a name="registerlink" style="margin-left:85px; color:darkblue" onClick="loadPage('routes/register.php<?php echo isset($_GET['page']) ? "?page=" . $_GET['page'] : "";?>')">Register</a>
   <?php //Carry $_GET['page'] across pages ?>
 
 </form>
-
 <script>
     var sessionid = "<?php echo session_id();?>";
     var crypto_challenge = "<?php echo $_SESSION['crypto_challenge'];?>";
@@ -65,3 +64,4 @@
       //ALSO IMPLEMENT TO FORGOTPW.PHP PAGE
     }
 </script>
+<script src="js/login.js"></script>

@@ -6,11 +6,11 @@
     </title>
     <link rel="stylesheet" type="text/css" href="css/layout.css">
     <link rel="stylesheet" type="text/css" href="css/search.css">
-  </head>
-  <body>
     <script src="js/jquery.js"></script>
     <script src="js/main.js"></script>
     <script src="js/sha256.js"></script>
+  </head>
+  <body>
     <?php
       SESSION_START();
       include('partials/header.php');
@@ -18,7 +18,6 @@
       //$_SESSION['authentication'] is only used to direct to the correct page
       //Not for security purpose. Security is handled in individual pages
         //include('partials/sidebar.php');
-        //echo <
         switch($_GET['page']){
           case "feed":
           case "profile":
