@@ -14,16 +14,18 @@ function registerAttempt(redirect) {
   else {
     $("#message").html("");
     //loadPage("essentials/check_register.php");
+    loadCheckRegister(redirect);
   }
 }
 
 
-function loadCheckRegister() {
+function loadCheckRegister(redirect) {
   var username = $("#register_username").val();
   var salt = "98866a88c5fb4683636443dfb0e7d2a67c892baadc65749edad0fa5d588f7d6b";
   var salted_password =
     CryptoJS.SHA256(username + salt + $("#register_password").val());
-
+  //Do not send plain-password
+  
   $.ajax({
     method: "POST",
     url: "essentials/check_register.php",
