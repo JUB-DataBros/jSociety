@@ -55,11 +55,14 @@ input[type=text].search:focus {
      overflow:auto;
 }
 
-.body > .event-table table, th, td{
+.body > .event-table table,
+.body > .event-table th,
+.body > .event-table td{
    padding: 10px;
    text-align: left;
 }
-.body > .event-table th, td{
+.body > .event-table th,
+.body > .event-table td{
    width: 19%;
    height: 40px;
    border-bottom: 1px solid #ddd;
@@ -96,8 +99,6 @@ input[type=text].search:focus {
 }
 
 /*We display the result as list*/
-/*url(".../images/picuter.png") didn't worked
-url("images/picuter.png") didn't worked aswell*/
 .body > .student-button li.major{
     list-style: circle inside url("../images/diploma.png");
     background-repeat: no-repeat;
