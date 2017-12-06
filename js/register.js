@@ -13,7 +13,7 @@ function registerAttempt(redirect) {
   }
   else {
     $("#message").html("");
-    loadPage("essentials/check_register.php");
+    //loadPage("essentials/check_register.php");
   }
 }
 

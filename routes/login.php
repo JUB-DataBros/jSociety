@@ -63,4 +63,4 @@
       //ALSO IMPLEMENT TO FORGOTPW.PHP PAGE
     }
 </script>
-<script src="js/login.js"></script>
+<script src="js/login.js">//This should remain after the previous script block</script>
