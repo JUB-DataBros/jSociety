@@ -32,7 +32,7 @@ This must be included in every partial other than login.php and forgotpw.php
       //$_SESSION['userid'] = ... Fetch user ID here !!!!!!!!!!!!!!1
       //$_SESSION['usertype'] = ... Fetch type of the user here. 0 for admin 1 for user
       //Load the sidebarClick
-      echo "<script>if(sidebarLoaded == 0){loadSidebar();}</script>";
+      echo "<script>loadSidebar();</script>";
       //Only end that doesn't die()
     }
     else {
@@ -41,8 +41,8 @@ This must be included in every partial other than login.php and forgotpw.php
       unset($_SESSION['userid']);
       unset($_SESSION['usertype']);
       //Remove the incorrect cookie values username and token
-      setcookie("username", "", time()-3600, "/jSociety/beta/");
-      setcookie("token", "", time()-3600, "/jSociety/beta/");
+      setcookie("username", "", time()-3600, "/");
+      setcookie("token", "", time()-3600, "/");
       //Because if these cookies are present login.php redirects to feed.php that includes this page
       //In case the user was already logged in but opens login.php
       die($error_script); //Reload login page
@@ -66,7 +66,7 @@ This must be included in every partial other than login.php and forgotpw.php
   }
   if($s == True) {
     $_SESSION['crypto_challenge'] = $new_challenge;
-    setcookie("challenge", $_SESSION['crypto_challenge'], 0, "/jSociety/beta/"); //To be changed upon deployment
+    setcookie("challenge", $_SESSION['crypto_challenge'], 0, "/"); //To be changed upon deployment
     //Session and cookie are always syncronized on the crypto challenge
     //Thats why always use those two to refer the crypto challenge
     //Do not use hidden form input
@@ -89,7 +89,7 @@ This must be included in every partial other than login.php and forgotpw.php
     var crypto_challenge = "<?php echo $_SESSION['crypto_challenge'];?>";
     var token = CryptoJS.SHA256(localStorage.getItem("crypto_key") + crypto_challenge);
 
-    document.cookie = "username=" + username;
-    document.cookie = "token=" + token;
+    document.cookie = "username=" + username + "; path=/";
+    document.cookie = "token=" + token + "; path=/";
   }
 </script>

@@ -19,10 +19,10 @@ function loginAttempt(redirect) {
     localStorage.setItem("username", username);
     localStorage.setItem("crypto_key", crypto_key);
 
-    var token = CryptoJS.SHA256(localStorage.getItem("crypto_key") + crypto_challenge)
+    var token = CryptoJS.SHA256(localStorage.getItem("crypto_key") + crypto_challenge);
 
-    document.cookie = "username=" + username;
-    document.cookie = "token=" + token;
+    document.cookie = "username=" + username + "; path=/";
+    document.cookie = "token=" + token + "; path=/";
 
     //For comparison with server-side script
     //alert(username + "\n" + salt + "\n" + $("#login_password").val() + "\n" + salted_password + "\n" + sessionid + "\n" + crypto_key + "\n" + crypto_challenge  + "\n" + token + "\n");

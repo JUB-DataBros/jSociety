@@ -5,9 +5,9 @@
   SESSION_START();
   $_SESSION['authentication'] = 0;
   //Delete the cookies
-  setcookie("username", "", time()-3600, "/jSociety/beta/");
-  setcookie("challenge", "", time()-3600, "/jSociety/beta/");
-  setcookie("token", "", time()-3600, "/jSociety/beta/");
+  setcookie("username", "", time()-3600, "/");
+  setcookie("token", "", time()-3600, "/");
+  setcookie("challenge", "", time()-3600, "/");
 ?>
 <script>
   //Remove the crypto_key from the local storage

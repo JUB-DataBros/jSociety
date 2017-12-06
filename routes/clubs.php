@@ -1,11 +1,10 @@
-<h1>This is the clubs page!</h1>
 <select id="selector" onchange="loadPage('routes/clubs.php', {show: $('#selector').val()})">
 	<option value='def'>Interested</option>
 	<option value='all' <?php $show = $_GET['show'] ? $_GET['show'] : "def"; if($show=="all") echo "selected";?>>All</option>
 </select>
 <table>
 <?php
-// include("../essentials/security_check.php");
+include("../essentials/security_check.php");
 include("../essentials/db.php");
 if ($show == "all") {
 	$stmt = "SELECT c.ID, c.NAME, s.NAME, h.NAME FROM JSO_CLUB AS c, JSO_STUDENT AS s WHERE c.APPROVED = 1 AND c.ORGANISOR = s.ID AND c.FOCUS = h.ID";

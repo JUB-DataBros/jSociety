@@ -1,7 +1,6 @@
-<h1>This is the events page!</h1>
-
 <?php
-  $sql = "SELECT name, createdby, detail FROM dabr_events";
+  include("../essentials/security_check.php");
+  //$sql = "SELECT name, createdby, detail FROM dabr_events";
   //$result = runSQL($sql);
   $result[0]['name'] = "Chess Society Meeting"; //
   $result[0]['createdby'] = "John Doe"; //

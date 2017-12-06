@@ -8,4 +8,3 @@ This website is student lab work and does not necessarily reflect Jacobs Univers
 <p>
 <b>Contact:</b> <a href="mailto:jub.databros@gmail.com">jub.databros@gmail.com</a>
 </p>
-

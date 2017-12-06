@@ -7,7 +7,6 @@
   }
 
   session_start();
-  include("essentials/db.php");
   if($_SESSION['authentication'] == 1) {
     die("<script>loadPage('routes/feed.php');</script>");
   }
@@ -20,7 +19,7 @@
   }
   if($s == True) {
     $_SESSION['crypto_challenge'] = $new_challenge;
-    setcookie("challenge", $_SESSION['crypto_challenge'],0 ,"/jSociety/beta/"); //To be changed upon deployment
+    setcookie("challenge", $_SESSION['crypto_challenge'],0 ,"/"); //To be changed upon deployment
   }
   else {
     writeLOG("Crypto challenge could not be generated in 'login.php'");
@@ -52,9 +51,9 @@
   <a name="forgotpwlink" style="margin-left:30px; color:darkorange" onClick="loadPage('routes/forgotpw.php<?php echo isset($_GET['page']) ? "?page=" . $_GET['page'] : "";?>')">Forgot your password?</a>
   <br><br>
   <a name="registerlink" style="margin-left:85px; color:darkblue" onClick="loadPage('routes/register.php<?php echo isset($_GET['page']) ? "?page=" . $_GET['page'] : "";?>')">Register</a>
-  <?php //Carry $_GET['page'] across pages ?>
 
 </form>
+
 <script>
     var sessionid = "<?php echo session_id();?>";
     var crypto_challenge = "<?php echo $_SESSION['crypto_challenge'];?>";

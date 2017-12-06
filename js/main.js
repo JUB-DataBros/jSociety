@@ -1,3 +1,7 @@
+if (typeof(Storage) === "undefined") {
+    alert("Your web browser is not supported. This website will not function on your browser.");
+}
+
 function findGetParameter(parameterName) {
     var result = null,
         tmp = [];
@@ -37,38 +41,29 @@ function sidebarClick(page) {
   changeURL("?page=" + page);
 }
 
-function loadIndex() {
-  loadPage("routes/feed.php"); //Feed is the homepage
-  getPage = findGetParameter("page");
-  switch(getPage){
-    case "feed":
-    case "profile":
-    case "events":
-    case "clubs":
-    case "settings":
-    case "disclaimer":
-    case "maintenance":
-    case "createevent":
-    case "search":
-      loadPage("routes/" + getPage + ".php");
-      break;
+//Also loads the log-out button on the header
+function loadSidebar() {
+  if ($('div.sidebar').length == 0){
+    //Load the sidebar
+    $.ajax({
+      method: "POST",
+      url: "partials/sidebar.php",
+      data: {}
+    })
+
+    .done(function(data) {
+      $(".header").after(data);
+      sidebarLoaded = 1;
+    })
+
+    .fail(function(data) {
+      alert("Sidebar could not be loaded. Please refresh your page");
+    });
+  }
+  if ($('img#logout').length == 0){
+    //Load the log-out button
+    //It needs a hyperlink so to align with the logo due to CSS code
+    var logoutbutton = "<a><img id='logout' src='images/logout.png' alt='Log out?' onClick=\"loadPage('essentials/logout.php')\"></a>";
+    $(".header").append(logoutbutton);
   }
 }
-
-// barışa sor
-/*
-function search_(keyword){
-	alert("I am an alert");
-        if (str != null && !str.isEmpty()){
-		$_GET["keyword"] = keyword;
-		sidebarClick(searh);
-	}else
- 	    alert("Please Enter a Text");
-}
-
-function load(page,id) {
-    alert("I am an alert " +id);
-    sidebarClick(page);
-    $_GET["id"] = id;
-}
-*/
