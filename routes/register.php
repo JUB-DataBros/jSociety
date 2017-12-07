@@ -10,20 +10,20 @@
       <table>
         <tr>
           <td align="right">Full name</td>
-          <td><input type="text" id="register_fullname" placeholder="Full Name"></td>
+          <td><input type="text" id="register_fullname" placeholder="Full Name" autocomplete="off"></td>
         </tr>
         <tr>
           <td align="right">E-mail</td>
-          <td><input type="text" id="register_username" placeholder="e-mail address"></td>
+          <td><input type="text" id="register_username" placeholder="e-mail address" autocomplete="off"></td>
           <td>@jacobs-university.de</td>
         </tr>
         <tr>
           <td align="right">Password</td>
-          <td><input type="password" id="register_password" placeholder="********"></td>
+          <td><input type="password" id="register_password" placeholder="********" autocomplete="off"></td>
         </tr>
         <tr>
           <td align="right">Re-enter password</td>
-          <td><input type="password" id="register_reenter_password" placeholder="********"></td>
+          <td><input type="password" id="register_reenter_password" placeholder="********" autocomplete="off"></td>
         </tr>
         <tr>
           <td></td>

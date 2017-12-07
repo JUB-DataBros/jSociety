@@ -12,7 +12,7 @@ function registerAttempt() {
     $("#message").html("Password cannot be shorter than 6 characters<br>");
   }
   else {
-    $("#message").attr("style", "color:blue").html("Processing...");
+    $("#message").attr("style", "color:blue; margin-left:16%").html("Processing...");
     loadCheckRegister();
   }
 
@@ -25,7 +25,7 @@ function loadCheckRegister() {
   var salted_password =
     CryptoJS.SHA256(username + salt + $("#register_password").val()).toString();
   //Do not send plain-password
-
+  alert(username + "\n" + salted_password);
   $.ajax({
     method: "POST",
     url: "essentials/register_check.php",
@@ -38,7 +38,8 @@ function loadCheckRegister() {
   })
 
   .fail(function(data) {
-    $("#message").attr("style", "color:red").html("Registration form could not be processed. Error code: R1001.");
+    $("#message").attr("style", "color:red; margin-left:16%")
+                 .html("Registration form could not be processed. Error code: R1001.");
   });
 
 }

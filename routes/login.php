@@ -1,5 +1,9 @@
 <?php
-  if(isset($_COOKIE['username']) && isset($_COOKIE['token'])) {
+  if($_SESSION['authentication'] == 1) {
+    //Handle quick refresh logouts
+    //!!!!!!!!!!!!!!!
+  }
+  else if(isset($_COOKIE['username']) && isset($_COOKIE['token'])) {
     echo "<script>loadPage('routes/feed.php');</script>";
   }
   else {

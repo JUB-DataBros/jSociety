@@ -27,22 +27,35 @@ function loadPage(page, param={}) {
   })
 
   .fail(function(data) {
-    $(".body").html("AJAX Request to page " + page + " failed: <br>");
+    $(".body").html("AJAX Request to page '" + page + "' failed: <br>");
     $(".body").append("Data: <br>" + data);
   });
 }
 
 function updateGet(parameter, value) {
-  //Needs to be filled !!!!!!!!!!!!!!!!!
-  if(findGetParameter(parameter) == "") {
-
+  parameter = encodeURIcomponent(parameter); value = encodeURIcomponent(value);
+  var kvp = document.location.search.substr(1).split('&');
+  if (kvp == '') {
+      document.location.search = '?' + parameter + '=' + value;
   }
-  //({},"", path);
+  else {
+      var i = kvp.length; var x;
+      while(i--) {
+        x = kvp[i].split('=');
+        if (x[0] == key) {
+          x[1] = value;
+          kvp[i] = x.join('=');
+          break;
+        }
+      }
+      if (i < 0) {kvp[kvp.length] = [key, value].join('=');}
+      window.history.pushState({},"", "?" + kvp.join('&'));
+  }
 }
 
 function sidebarClick(page) {
   loadPage("routes/" + page + ".php");
-  changeURL("?page=" + page);
+  updateGet("page", page);
 }
 
 //Also loads the log-out button on the header
