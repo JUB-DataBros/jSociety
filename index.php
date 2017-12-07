@@ -34,11 +34,13 @@
         }
       }
       else {
-        if($_GET['page'] == "register"){
-          echo "<script>loadPage('routes/register.php');</script>";
-        }
-        else{
-          echo "<script>loadPage('routes/login.php');</script>";
+        switch($_GET['page']){
+          case "forgotpw":
+          case "register":
+            echo "<script>loadPage('routes/" . $_GET['page'] . ".php');</script>";
+            break;
+          default:
+            echo "<script>loadPage('routes/login.php');</script>";
         }
       }
     ?>
