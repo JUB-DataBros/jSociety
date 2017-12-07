@@ -10,6 +10,6 @@
       echo "<script>$('#message').attr('style', 'color:green').html('Registration Successful'); localStorage.setItem('username'," . $_POST['register_username'] . ");</script>";
   }
   else {
-    echo "<script>$('#message').attr('style', 'color:red').html('Invalid input. Registration failed.');</script>";
+    echo "<script>$('#message').attr('style', 'color:red').html('Invalid Input');</script>";
   }
 ?>

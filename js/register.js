@@ -38,8 +38,7 @@ function loadCheckRegister() {
   })
 
   .fail(function(data) {
-    alert("Registration form could not be processed. Error code: R1001.");
-    loadPage("routes/register.php");
+    $("#message").attr("style", "color:red").html("Registration form could not be processed. Error code: R1001.");
   });
 
 }
