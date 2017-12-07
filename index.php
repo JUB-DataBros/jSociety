@@ -11,6 +11,7 @@
   <body>
     <?php
       session_start();
+      //header("Cache-Control: no-cache, must-revalidate");
       include("essentials/db.php");
       include('partials/header.php');
       if($_SESSION['authentication'] == 1) {
@@ -24,6 +25,8 @@
           case "clubs":
           case "settings":
           case "disclaimer":
+          case "forgotpw":
+          case "register":
             echo "<script>loadPage('routes/" . $_GET['page'] . ".php');</script>";
             break;
           default:
@@ -31,7 +34,12 @@
         }
       }
       else {
-        echo "<script>loadPage('routes/login.php');</script>";
+        if($_GET['page'] == "register"){
+          echo "<script>loadPage('routes/register.php');</script>";
+        }
+        else{
+          echo "<script>loadPage('routes/login.php');</script>";
+        }
       }
     ?>
     <div class="body">

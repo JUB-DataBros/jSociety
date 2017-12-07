@@ -1,4 +1,4 @@
-function registerAttempt(redirect) {
+function registerAttempt() {
   if($("#register_fullname").val() === "") {
     $("#message").html("Full name cannot be left blank<br>");
   }
@@ -12,25 +12,25 @@ function registerAttempt(redirect) {
     $("#message").html("Password cannot be shorter than 6 characters<br>");
   }
   else {
-    $("#message").html("");
-    //loadPage("essentials/check_register.php");
-    loadCheckRegister(redirect);
+    $("#message").attr("style", "color:blue").html("Processing...");
+    loadCheckRegister();
   }
+
 }
 
 
-function loadCheckRegister(redirect) {
+function loadCheckRegister() {
   var username = $("#register_username").val();
   var salt = "98866a88c5fb4683636443dfb0e7d2a67c892baadc65749edad0fa5d588f7d6b";
   var salted_password =
-    CryptoJS.SHA256(username + salt + $("#register_password").val());
+    CryptoJS.SHA256(username + salt + $("#register_password").val()).toString();
   //Do not send plain-password
-  
+
   $.ajax({
     method: "POST",
-    url: "essentials/check_register.php",
-    data: {"fullname":$("#register_fullname").val(), "username":username,
-           "password":salted_password, "redirect":redirect}
+    url: "essentials/register_check.php",
+    data: {register_fullname:$("#register_fullname").val(), register_username:username,
+           register_password:salted_password}
   })
 
   .done(function(data) {
@@ -38,7 +38,8 @@ function loadCheckRegister(redirect) {
   })
 
   .fail(function(data) {
-    alert("Registration could not be completed");
+    alert("Registration form could not be processed. Error code: R1001.");
     loadPage("routes/register.php");
   });
+
 }

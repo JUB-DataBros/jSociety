@@ -87,7 +87,7 @@ This must be included in every partial other than login.php and forgotpw.php
     var username = localStorage.getItem("username");
     //var crypto_challenge = document.cookie.match(new RegExp('challenge' + '=([^;]+)'))[1];
     var crypto_challenge = "<?php echo $_SESSION['crypto_challenge'];?>";
-    var token = CryptoJS.SHA256(localStorage.getItem("crypto_key") + crypto_challenge);
+    var token = CryptoJS.SHA256(localStorage.getItem("crypto_key") + crypto_challenge).toString();
 
     document.cookie = "username=" + username + "; path=/";
     document.cookie = "token=" + token + "; path=/";

@@ -32,8 +32,12 @@ function loadPage(page, param={}) {
   });
 }
 
-function changeURL(path) {
-  window.history.pushState({},"", path);
+function updateGet(parameter, value) {
+  //Needs to be filled !!!!!!!!!!!!!!!!!
+  if(findGetParameter(parameter) == "") {
+
+  }
+  //({},"", path);
 }
 
 function sidebarClick(page) {
