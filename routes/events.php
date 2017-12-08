@@ -1,6 +1,7 @@
 <?php
 include_once("../essentials/db.php");
 include_once("../essentials/security_check.php");
+echo "<button type='button' onclick='loadPage(routes/createevent.php)'>Create New Event</button><br>";
   //$sql = "SELECT name, createdby, detail FROM dabr_events";
   //$result = runSQL($sql);
   $result[0]['name'] = "Chess Society Meeting"; //

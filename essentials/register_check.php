@@ -11,7 +11,7 @@
       $args = array(":username" => $_POST['register_username']);
       $result = runSQL($sql, $args);
       if($result == null) {
-        die(changeMessage("Error in database querying. Error Code: Q1001"));
+        die(changeMessage("Error in database querying. Error Code: Q1001", "red"));
       }
       $result = $result -> fetchColumn();
 
