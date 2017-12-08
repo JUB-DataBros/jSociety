@@ -1,7 +1,7 @@
 <?php
 include_once("../essentials/db.php");
 include_once("../essentials/security_check.php");
-<<<<<<< HEAD
+//<<<<<<< HEAD
   $sql = "SELECT NAME, ORGANIZEDBY, DETAIL, STARTTIME, ENDTIME FROM JSO_EVENT WHERE APPROVED = 1";
   $result = runSQL($sql, Array());
   if($result == null) {
