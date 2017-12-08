@@ -1,6 +1,7 @@
 <?php
 include_once("../essentials/db.php");
 include_once("../essentials/security_check.php");
+<<<<<<< HEAD
   $sql = "SELECT NAME, ORGANIZEDBY, DETAIL, STARTTIME, ENDTIME FROM JSO_EVENT WHERE APPROVED = 1";
   $result = runSQL($sql, Array());
   if($result == null) {
@@ -8,6 +9,11 @@ include_once("../essentials/security_check.php");
   }
   $result = $result -> fetchAll();
   /*
+=======
+echo "<button type='button' onclick='loadPage(routes/createevent.php)'>Create New Event</button><br>";
+  //$sql = "SELECT name, createdby, detail FROM dabr_events";
+  //$result = runSQL($sql);
+>>>>>>> 760c8220da8e19ee87af43a8161dee873616aab8
   $result[0]['name'] = "Chess Society Meeting"; //
   $result[0]['createdby'] = "John Doe"; //
   $result[0]['detail'] = "Come to Mercator common room"; //

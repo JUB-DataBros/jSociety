@@ -8,20 +8,18 @@
     include_once("../essentials/db.php");
     include_once("../essentials/security_check.php");
 
-    $stmt = "SELECT c.id c.name FROM JSO_CLUB c WHERE c.organisor = {$_SESSION['id']}";
-    //$query = runSQL($stmt);
-    $result[0][0] = 0; //
-    $result[0][1] = "Chess Society"; //
-    $result[1][0] = 2; //
-    $result[1][1]="Computer Science"; //
-    $result[2][0] = 2; //
-    $result[2][1] = "Waffle Club"; //
+    $stmt = "SELECT c.id c.name FROM JSO_CLUB c WHERE c.organisor = :id";
+    $query = runSQL($stmt, array(':id' => $_SESSION['id']));
+    // $result[0][0] = 0; //
+    // $result[0][1] = "Chess Society"; //
+    // $result[1][0] = 2; //
+    // $result[1][1]="Computer Science"; //
+    // $result[2][0] = 2; //
+    // $result[2][1] = "Waffle Club"; //
 
-    //while($result = mysql_fetch_array($query)){
-    $i = 0;
-    while($i < 3){
-      echo "<option value='" . $result[$i][0] . "'>" . $result[$i][1] . "</option>";
-      $i = $i + 1;
+    $result = $query->fetchAll();
+    foreach ($result as $club) {
+      echo "<option value='" . $club[0] . "'>" . $club[1] . "</option>";
     }
   ?>
   </select><br>
