@@ -25,7 +25,7 @@ function loadCheckRegister() {
   var salted_password =
     CryptoJS.SHA256(username + salt + $("#register_password").val()).toString();
   //Do not send plain-password
-  alert(username + "\n" + salted_password);
+  //alert(username + "\n" + salted_password);
   $.ajax({
     method: "POST",
     url: "essentials/register_check.php",
@@ -34,7 +34,7 @@ function loadCheckRegister() {
   })
 
   .done(function(data) {
-    $(".body").append(data);
+    $(".register_check").html(data);
   })
 
   .fail(function(data) {

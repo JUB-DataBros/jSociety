@@ -34,6 +34,7 @@
       <p id="message" style="color:red; margin-left:16%"></p>
     </form>
 
+    <div class="register_check"><br></div>
 
 
   </body>

@@ -1,5 +1,6 @@
 <?php
-  include("../essentials/security_check.php");
+include_once("../essentials/db.php");
+include_once("../essentials/security_check.php");
   //$sql = "SELECT name, createdby, detail FROM dabr_events";
   //$result = runSQL($sql);
   $result[0]['name'] = "Chess Society Meeting"; //

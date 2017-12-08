@@ -3,6 +3,7 @@ This must be included in every partial other than login.php and forgotpw.php
 //login.php creates its own crypto challenge
 -->
 <?php
+  include_once("db.php");
   SESSION_START();
   $error_script = "<script>$('div.sidebar').remove();$('img#logout').remove();loadPage('routes/login.php');</script>";
   if(isset($_COOKIE['username']) && isset($_COOKIE['token'])) {
@@ -11,12 +12,18 @@ This must be included in every partial other than login.php and forgotpw.php
     //$salt = hash("sha256", "jSociety by DataBros", false);
     //The same as above but no need to compute every time
     $salt = "98866a88c5fb4683636443dfb0e7d2a67c892baadc65749edad0fa5d588f7d6b";
-    $password = substr($_COOKIE['username'], 0, 3) . "123";
+    //$password = substr($_COOKIE['username'], 0, 3) . "123";
     //In this test case, password for each username starts with
     //the first 3 letters of the username and followed by "123"
-    $salted_password = hash("sha256", $_COOKIE['username'] . $salt . $password, false);
-    //Normally fetch salted_password from the database
-
+    //$salted_password = hash("sha256", $_COOKIE['username'] . $salt . $password, false);
+    $sql = "SELECT PASSWORD FROM JSO_STUDENT WHERE EMAIL = :username";
+    $args = array(":username" => $_COOKIE['username']);
+    $result = runSQL($sql, $args);
+    if($result == null) {
+      die("<h1 style='color:red'>Error in database querying</h1> <br>Error Code: Q1003");
+    }
+    $result = $result -> fetch();
+    $salted_password = $result["PASSWORD"];
     //Expected crypto key
     $crypto_key = hash("sha256", $_COOKIE['username'] . $salted_password . session_id(), false);
     //Expected token
@@ -31,8 +38,15 @@ This must be included in every partial other than login.php and forgotpw.php
       }
       $_SESSION['authentication'] = 1;
       $_SESSION['username'] = $_COOKIE['username']; //It will be needed
-      //$_SESSION['userid'] = ... Fetch user ID here !!!!!!!!!!!!!!1
-      //$_SESSION['usertype'] = ... Fetch type of the user here. 0 for admin 1 for user
+      $_SESSION['usertype'] = 1;
+      $sql = "SELECT ID FROM JSO_STUDENT WHERE EMAIL = :username";
+      $args = array(":username" => $_SESSION['username']);
+      $result = runSQL($sql, $args);
+      if($result == null) {
+        die("<h1 style='color:red'>Error in database querying</h1> <br>Error Code: Q1004</h1>");
+      }
+      $result = $result -> fetch();
+      $_SESSION['userid'] = $result[0];
       //Load the sidebarClick
       echo "<script>loadSidebar();</script>";
       //Only end that doesn't die()
@@ -77,7 +91,7 @@ This must be included in every partial other than login.php and forgotpw.php
   }
   else {
     writeLOG("New crypto challenge could not be generated in 'security_check.php'");
-    die("<h1>Unexpected Error</h1><br>Error code: J1002. <a onClick=\"loadPage('index.php')>Click here to continue</a>\"");
+    die("<h1>Unexpected Error</h1><br>Error code: S1003<br><a onClick=\"loadPage('index.php')>Click here to continue</a>\"");
   }
 ?>
 <script>

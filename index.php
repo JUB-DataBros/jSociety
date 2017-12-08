@@ -10,14 +10,19 @@
   </head>
   <body>
     <?php
+      ini_set('display_errors', 1);
+      ini_set('display_startup_errors', 1);
+      error_reporting(E_ALL);
+
       session_start();
+      $_SESSION['usertype'] = 0;
       //header("Cache-Control: no-cache, must-revalidate");
-      include("essentials/db.php");
-      include('partials/header.php');
+      include_once("essentials/db.php");
+      include_once('partials/header.php');
       if($_SESSION['authentication'] == 1) {
       //$_SESSION['authentication'] is only used to direct to the correct page
       //Not for security purpose. Security is handled in individual pages
-        include('partials/sidebar.php');
+        include_once('partials/sidebar.php');
         switch($_GET['page']){
           case "feed":
           case "profile":

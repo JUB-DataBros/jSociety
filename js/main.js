@@ -27,13 +27,12 @@ function loadPage(page, param={}) {
   })
 
   .fail(function(data) {
-    $(".body").html("AJAX Request to page '" + page + "' failed: <br>");
-    $(".body").append("Data: <br>" + data);
+    $(".body").html("AJAX Request to page '" + page + "' failed: <br> Error code: G-" + page.split("/")[page.split("/").length-1].split(".")[0].toUpperCase());
   });
 }
 
 function updateGet(parameter, value) {
-  parameter = encodeURIcomponent(parameter); value = encodeURIcomponent(value);
+  parameter = encodeURIComponent(parameter); value = encodeURIComponent(value);
   var kvp = document.location.search.substr(1).split('&');
   if (kvp == '') {
       document.location.search = '?' + parameter + '=' + value;
@@ -42,13 +41,13 @@ function updateGet(parameter, value) {
       var i = kvp.length; var x;
       while(i--) {
         x = kvp[i].split('=');
-        if (x[0] == key) {
+        if (x[0] == parameter) {
           x[1] = value;
           kvp[i] = x.join('=');
           break;
         }
       }
-      if (i < 0) {kvp[kvp.length] = [key, value].join('=');}
+      if (i < 0) {kvp[kvp.length] = [parameter, value].join('=');}
       window.history.pushState({},"", "?" + kvp.join('&'));
   }
 }
